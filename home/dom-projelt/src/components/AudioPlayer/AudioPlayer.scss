@@ -1,0 +1,8 @@
+.audio-player {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  & > span {
+    padding: 10px;
+  }
+}
