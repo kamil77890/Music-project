@@ -42,7 +42,6 @@ const AudioPlayer = (props) => {
       <button onClick={handleToggleButtonClick}>
         <span style={{ padding: "5px", textAlign: "center" }}>{songName}</span>
       </button>
-      <p>Ja!!!</p>
     </div>
   );
 };
