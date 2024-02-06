@@ -1,6 +1,5 @@
 // AudioPlayer.jsx
 import React, { useEffect, useState } from "react";
-import { FaPlay, FaPause } from "react-icons/fa";
 import "./AudioPlayer.scss";
 import Playlist from "../../assets/songs.json";
 
@@ -41,7 +40,6 @@ const AudioPlayer = (props) => {
   return (
     <div className="audio-player">
       <button onClick={handleToggleButtonClick}>
-        {isPlaying ? <FaPause /> : <FaPlay />}
         <span style={{ padding: "5px", textAlign: "center" }}>{songName}</span>
       </button>
     </div>
