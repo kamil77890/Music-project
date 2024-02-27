@@ -13,9 +13,9 @@ const Clock = (props) => {
   }, []);
 
   const currentDate = new Date(currentTime);
-  const hours = currentDate.getHours()
-  const minutes = currentDate.getMinutes()
-  const seconds = currentDate.getSeconds()
+  const hours = currentDate.getHours();
+  const minutes = currentDate.getMinutes();
+  const seconds = currentDate.getSeconds();
 
   return (
     <div className="clock">

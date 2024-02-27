@@ -1,8 +1,28 @@
 .audio-player {
-  display: flex;
-  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 5px;
   padding: 10px;
-  & > span {
-    padding: 10px;
-  }
+  margin-bottom: 10px;
+}
+
+.audio-player.playing {
+  background-color: #e0e0e0;
+}
+
+.audio-player button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+  outline: none;
+}
+
+.audio-player button:hover {
+  background-color: #0056b3;
+}
+
+.audio-player span {
+  margin-left: 10px;
 }

@@ -1,47 +1,76 @@
-// AudioPlayer.jsx
-import React, { useEffect, useState } from "react";
-import "./AudioPlayer.scss";
-import Playlist from "../../assets/songs.json";
+import React, { useState } from "react";
+import Playlist from "../context/Playlist";
+import { BsThreeDotsVertical } from "react-icons/bs";
+import { CiHeart } from "react-icons/ci";
 
-const AudioPlayer = (props) => {
-  const { src, id } = props;
-  const [audio, setAudio] = useState(new Audio(src));
+const AudioPlayer = () => {
+  const [selectedSong, setSelectedSong] = useState(null);
+  const [audio] = useState(new Audio());
   const [isPlaying, setIsPlaying] = useState(false);
-  const [currentTime, setCurrentTime] = useState(0);
-
-  useEffect(() => {
-    setAudio(new Audio(src));
-    return () => audio.pause();
-  }, [src]);
-
-  useEffect(() => {
-    const handlePlay = () => setIsPlaying(true);
-    const handlePause = () => setIsPlaying(false);
-    const handleTimeUpdate = () => setCurrentTime(audio.currentTime);
-
-    audio.addEventListener("play", handlePlay);
-    audio.addEventListener("pause", handlePause);
-    audio.addEventListener("timeupdate", handleTimeUpdate);
-
-    return () => {
-      audio.removeEventListener("play", handlePlay);
-      audio.removeEventListener("pause", handlePause);
-      audio.removeEventListener("timeupdate", handleTimeUpdate);
-    };
-  }, [audio]);
-
-  const currentSong = Playlist.find((song) => String(song.id) === String(id));
-  const songName = currentSong ? currentSong.title : "";
+  const [error, setError] = useState(null);
 
   const handleToggleButtonClick = () => {
-    isPlaying ? audio.pause() : audio.play();
+    if (!selectedSong) {
+      setError("No song selected");
+      return;
+    }
+
+    if (error) {
+      setError(null);
+    }
+
+    if (!isPlaying) {
+      try {
+        setIsPlaying(true);
+        console.log(selectedSong);
+        audio.src = selectedSong;
+        audio.play();
+      } catch (error) {
+        console.log("Error toggling audio playback:", error);
+      }
+    } else {
+      audio.pause();
+      setIsPlaying(false);
+    }
+  };
+
+  audio.onerror = (error) => {
+    setError(error);
+    setIsPlaying(false);
+  };
+
+  const formatTime = (timeInSeconds) => {
+    const minutes = Math.floor(timeInSeconds / 60);
+    const seconds = Math.floor(timeInSeconds % 60);
+    return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
   };
 
   return (
-    <div className="audio-player">
-      <button onClick={handleToggleButtonClick}>
-        <span style={{ padding: "5px", textAlign: "center" }}>{songName}</span>
-      </button>
+    <div>
+      <ul>
+        {Playlist.map((song) => (
+          <li key={song.id}>
+            <div className="songContainer">
+              <div className="settup">
+                {/* <img src={song.Url} alt="songImage" /> */}
+                <h1>{song.title}</h1>
+              </div>
+              <div className="controls">
+                <CiHeart />
+                <BsThreeDotsVertical />
+              </div>
+              <button onClick={() => setSelectedSong(song.path)}>
+                PLay some sht
+              </button>
+            </div>
+            <div className="player">
+              <button onClick={handleToggleButtonClick}>
+                {isPlaying ? "Pause" : "Play"}
+              </button>
+            </div>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };
