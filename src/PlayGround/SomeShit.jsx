@@ -1,18 +1,20 @@
 import PLaylist from "../components/context/Playlist";
 import { useState } from "react";
+import "./SomeShit.scss";
 
 function SomeShit() {
   const [isChoosen, setIsChoosen] = useState(null);
   const [audio] = useState(new Audio());
 
   const handlePLay = (path) => {
+    const song = path;
     setIsChoosen(true);
-    audio.src = path;
+    audio.src = song;
     audio.play();
   };
   return (
     <div>
-      <h1>RRRRRRRRRRRRRR</h1>
+      <h3>RRRRRRRRRRRRRR</h3>
       <ul>
         {PLaylist.map((song, i) => (
           <li
@@ -24,7 +26,9 @@ function SomeShit() {
             }}
           >
             <div>
-              <h1>{song.title}</h1>
+              <button>
+                <h4>ja</h4>
+              </button>
             </div>
           </li>
         ))}
