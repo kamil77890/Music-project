@@ -1,13 +1,13 @@
 import React from "react";
 import "./App.css";
-// import AudioPlayer from "./components/AudioPlayer/AudioPlayer";
-import SomeShit from "./PlayGround/SomeShit";
+import AudioPlayer from "./components/AudioPlayer/AudioPlayer";
+import SomeShit from "./someshit2/PlayGround/SomeShit";
 
 function App() {
   return (
     <main className="music">
       <div className="audio-players">
-        {/* <AudioPlayer /> */}
+        <AudioPlayer />
         <SomeShit />
       </div>
     </main>

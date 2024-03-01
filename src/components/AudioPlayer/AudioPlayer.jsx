@@ -10,19 +10,9 @@ const AudioPlayer = () => {
   const [error, setError] = useState(null);
 
   const handleToggleButtonClick = () => {
-    if (!selectedSong) {
-      setError("No song selected");
-      return;
-    }
-
-    if (error) {
-      setError(null);
-    }
-
     if (!isPlaying) {
       try {
         setIsPlaying(true);
-        console.log(selectedSong);
         audio.src = selectedSong;
         audio.play();
       } catch (error) {
