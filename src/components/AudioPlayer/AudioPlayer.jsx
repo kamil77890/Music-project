@@ -7,26 +7,18 @@ const AudioPlayer = () => {
   const [selectedSong, setSelectedSong] = useState(null);
   const [audio] = useState(new Audio());
   const [isPlaying, setIsPlaying] = useState(false);
-  const [error, setError] = useState(null);
+  const [lastSong, setLastSong] = useState(null);
+  const [date, setDate] = useState(new Date());
 
   const handleToggleButtonClick = () => {
-    if (!isPlaying) {
-      try {
-        setIsPlaying(true);
-        audio.src = selectedSong;
-        audio.play();
-      } catch (error) {
-        console.log("Error toggling audio playback:", error);
-      }
+    if (!isPlaying && selectedSong(false)) {
+      setIsPlaying(true);
+      audio.src = selectedSong;
+      audio.play();
     } else {
       audio.pause();
       setIsPlaying(false);
     }
-  };
-
-  audio.onerror = (error) => {
-    setError(error);
-    setIsPlaying(false);
   };
 
   const formatTime = (timeInSeconds) => {
@@ -57,6 +49,7 @@ const AudioPlayer = () => {
               <button onClick={handleToggleButtonClick}>
                 {isPlaying ? "Pause" : "Play"}
               </button>
+              <h1>{formatTime(date)}</h1>
             </div>
           </li>
         ))}

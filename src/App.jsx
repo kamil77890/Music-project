@@ -7,7 +7,7 @@ function App() {
   return (
     <main className="music">
       <div className="audio-players">
-        <AudioPlayer />
+        {/* <AudioPlayer /> */}
         <SomeShit />
       </div>
     </main>

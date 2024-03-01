@@ -8,17 +8,18 @@ function SomeShit() {
   const [audio] = useState(new Audio());
 
   const handlePLay = (path) => {
+    const srcF = path;
     setIsChoosen(true);
     audio.src = path;
     audio.play();
   };
   return (
     <div>
-      <h3>RRRRRRRRRRRRRR</h3>
+      <h3>Music Shoot!</h3>
       <ul>
-        {PLaylist.map((song, i) => (
+        {PLaylist.map((song, index) => (
           <li
-            key={i}
+            key={index}
             onClick={() => {
               {
                 handlePLay(song.path);
