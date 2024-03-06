@@ -1,43 +1,55 @@
-import PLaylist from "../../components/context/Playlist";
-import { useState } from "react";
-import "./SomeShit.scss";
-import song1 from "../../to_Import";
+import React, { useState } from "react";
+import Playlist from "../../components/context/Playlist";
+import { BsThreeDotsVertical } from "react-icons/bs";
+import { CiHeart } from "react-icons/ci";
 
-function SomeShit() {
-  const [isChoosen, setIsChoosen] = useState(null);
-  const [audio] = useState(new Audio());
+const AudioPlayer = () => {
+  const [audio, setAudio] = useState(new Audio());
+  const [playingId, setPlayingId] = useState(null);
+  const [isChosen, setIsChosen] = useState(false);
+  const [date, setDate] = useState(new Date());
 
-  const handlePLay = (path) => {
-    const srcF = path;
-    setIsChoosen(true);
-    audio.src = path;
-    audio.play();
+  const handlePlay = (path, id) => {
+    if (!isChosen) {
+      setPlayingId(id);
+      setIsChosen(true);
+      audio.src = path;
+      audio.play();
+    } else {
+      setPlayingId(null);
+      setIsChosen(false);
+      audio.pause();
+    }
   };
+
+  const formatTime = (timeInSeconds) => {
+    const minutes = Math.floor(timeInSeconds / 60);
+    const seconds = Math.floor(timeInSeconds % 60);
+    return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
+  };
+
   return (
     <div>
       <h3>Music Shoot!</h3>
+      <p>Current Date: {date.toLocaleDateString()}</p>
       <ul>
-        {PLaylist.map((song, index) => (
-          <li
-            key={index}
-            onClick={() => {
-              {
-                handlePLay(song.path);
-              }
-            }}
-          >
-            <div>
-              <h3>{song.id}</h3>
-              <h5>{song.path}</h5>
-              <button>
-                <h4>{song.title}</h4>
-              </button>
-            </div>
-          </li>
-        ))}
+        {Object.keys(Playlist).map((id) => {
+          const song = Playlist[id];
+          return (
+            <li key={id}>
+              <div>
+                <h3>{song.title}</h3>
+                <h5>{id}</h5>
+                <button onClick={() => handlePlay(song.path, id)}>
+                  {playingId === id ? "pause" : "play"}
+                </button>
+              </div>
+            </li>
+          );
+        })}
       </ul>
     </div>
   );
-}
+};
 
-export default SomeShit;
+export default AudioPlayer;

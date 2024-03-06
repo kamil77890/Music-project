@@ -7,8 +7,9 @@ function App() {
   return (
     <main className="music">
       <div className="audio-players">
-        {/* <AudioPlayer /> */}
-        <SomeShit />
+        <AudioPlayer />
+        {/* <div style={{ padding: "500px" }}></div>
+        <SomeShit /> */}
       </div>
     </main>
   );

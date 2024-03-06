@@ -1,55 +1,103 @@
 import React, { useState } from "react";
+import "./AudioPlayer.scss";
 import Playlist from "../context/Playlist";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { CiHeart } from "react-icons/ci";
+import { FaPlay, FaPause, FaHeart } from "react-icons/fa";
 
 const AudioPlayer = () => {
-  const [selectedSong, setSelectedSong] = useState(null);
-  const [audio] = useState(new Audio());
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [lastSong, setLastSong] = useState(null);
-  const [date, setDate] = useState(new Date());
+  const [audio, setAudio] = useState(new Audio());
+  const [playingId, setPlayingId] = useState(null);
+  const [isChosen, setIsChosen] = useState(false);
+  const [likedSongs, setLikedSongs] = useState([]);
+  const [showOptions, setShowOptions] = useState(false);
+  const [CorrectPlaylist, setCorrectPlaylist] = useState(
+    Playlist.map((song) => ({
+      ...song,
+      isLiked: likedSongs.includes(song.id),
+    }))
+  );
 
-  const handleToggleButtonClick = () => {
-    if (!isPlaying && selectedSong(false)) {
-      setIsPlaying(true);
-      audio.src = selectedSong;
+  const handlePlay = (path, id) => {
+    if (!isChosen || playingId !== id) {
+      setPlayingId(id);
+      setIsChosen(true);
+      audio.src = path;
       audio.play();
     } else {
+      setPlayingId(null);
+      setIsChosen(false);
       audio.pause();
-      setIsPlaying(false);
     }
   };
 
-  const formatTime = (timeInSeconds) => {
-    const minutes = Math.floor(timeInSeconds / 60);
-    const seconds = Math.floor(timeInSeconds % 60);
-    return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
+  const handleLikeToggle = (id) => {
+    if (likedSongs.includes(id)) {
+      setLikedSongs(likedSongs.filter((songId) => songId !== id));
+    } else {
+      setLikedSongs([...likedSongs, id]);
+    }
+  };
+
+  const removeSong = (id) => {
+    setShowOptions(false);
+    setCorrectPlaylist(
+      CorrectPlaylist.filter((item) => Number(item.id) !== id)
+    );
   };
 
   return (
-    <div>
-      <ul>
-        {Playlist.map((song) => (
-          <li key={song.id}>
-            <div className="songContainer">
-              <div className="settup">
-                {/* <img src={song.Url} alt="songImage" /> */}
-                <h1>{song.title}</h1>
+    <div className="audio-player">
+      <h3>Music Shoot!</h3>
+      <ul className="songs">
+        {CorrectPlaylist.map((song) => (
+          <li key={song.id} className="song">
+            <div className="song">
+              <div>
+                <h3>{song.title}</h3>
               </div>
-              <div className="controls">
-                <CiHeart />
-                <BsThreeDotsVertical />
+
+              <div className="controlers">
+                <button
+                  onClick={() => {
+                    handlePlay(song.path, song.id);
+                  }}
+                  className="btn"
+                >
+                  {playingId === song.id ? <FaPause /> : <FaPlay />}
+                </button>
+                {song.isLiked ? (
+                  <FaHeart onClick={() => handleLikeToggle(song.id)} />
+                ) : (
+                  <CiHeart onClick={() => handleLikeToggle(song.id)} />
+                )}
+                <BsThreeDotsVertical
+                  onClick={() => setShowOptions(!showOptions)}
+                />
+                {showOptions && (
+                  <select className="options" name="options" size="3">
+                    <option value="Playlist">Add to Playlist</option>
+                    <option
+                      value="liked"
+                      onClick={() =>
+                        likedSongs.includes(song.id)
+                          ? setLikedSongs(
+                              likedSongs.filter((item) => item !== song.id)
+                            )
+                          : setLikedSongs([...likedSongs, song.id])
+                      }
+                    >
+                      {likedSongs.includes(song.id)
+                        ? "Remove from Likes"
+                        : "Add to Likes"}
+                    </option>
+                    <option value="randomChoise">Get a random Choise</option>
+                    <option value="Remove" onClick={() => removeSong(song.id)}>
+                      Remove Song
+                    </option>
+                  </select>
+                )}
               </div>
-              <button onClick={() => setSelectedSong(song.path)}>
-                PLay some sht
-              </button>
-            </div>
-            <div className="player">
-              <button onClick={handleToggleButtonClick}>
-                {isPlaying ? "Pause" : "Play"}
-              </button>
-              <h1>{formatTime(date)}</h1>
             </div>
           </li>
         ))}
