@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 const YouTubeSongs = () => {
   const [songs, setSongs] = useState([]);
-  const [query, setQuery] = useState("pop");
+  const [query, setQuery] = useState("music");
+  const [playing, setPlaying] = useState(false);
+  const playerRef = useRef();
+  const key = "AIzaSyAOYIg-rcUamh9qIOKjwk1lEfdxkl0C1Aw";
 
   useEffect(() => {
     const fetchData = async () => {
-      const key = "AIzaSyAvE9VqeJWOJoTwGK9Wi3lM2x8Jg5AXA5s";
       const response = await fetch(
         `https://www.googleapis.com/youtube/v3/search?key=${key}&part=snippet&type=video&maxResults=10&q=${query}`
       );
@@ -15,13 +17,11 @@ const YouTubeSongs = () => {
     };
 
     fetchData();
-
   }, [query]);
 
   const handleInputChange = (event) => {
     setQuery(event.target.value);
   };
-  
 
   return (
     <div>
@@ -30,13 +30,13 @@ const YouTubeSongs = () => {
       <ul>
         {songs.map((song) => (
           <li key={song.id.videoId}>
-            <a
-              href={`https://www.youtube.com/watch?v=${song.id.videoId}`}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {song.snippet.title}
-            </a>
+            <span>{song.snippet.title}</span>
+            <iframe
+              width="560"
+              height="315"
+              src={`https://www.youtube.com/embed/${song.id.videoId}`}
+              allowFullScreen
+            ></iframe>
           </li>
         ))}
       </ul>
