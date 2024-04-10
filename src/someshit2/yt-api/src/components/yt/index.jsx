@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import axios from "axios";
 
 const YouTubeSongs = () => {
   const [songs, setSongs] = useState([]);
@@ -9,7 +10,7 @@ const YouTubeSongs = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch(
+      const response = await axios.get(
         `https://www.googleapis.com/youtube/v3/search?key=${key}&part=snippet&type=video&maxResults=10&q=${query}`
       );
       const data = await response.json();
@@ -21,12 +22,14 @@ const YouTubeSongs = () => {
 
   const handleInputChange = (event) => {
     setQuery(event.target.value);
+    acces;
   };
 
   return (
     <div>
       <h2>YouTube Songs</h2>
       <input type="text" value={query} onChange={handleInputChange} />
+
       <ul>
         {songs.map((song) => (
           <li key={song.id.videoId}>
