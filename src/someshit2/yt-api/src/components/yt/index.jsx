@@ -51,8 +51,3 @@ const YouTubeSongs = () => {
 };
 
 export default YouTubeSongs;
-
-// api YT -> client -> którą pobrać ->
-// my używamy fetch do zamiany plików mp4 na mp3 i ich pobieranie:
-// https://ytmp3s.nu/link_do_filmu -> responce ->
-// https://notube.net/pl/youtube-app-v159
