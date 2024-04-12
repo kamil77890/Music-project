@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
+import "converter.scss";
 
 const YouTubeSongs = () => {
   const [songs, setSongs] = useState([]);
@@ -15,20 +16,25 @@ const YouTubeSongs = () => {
 
   const handleInputChange = (event) => {
     setQuery(event.target.value);
-    console.log(query);
+  };
+
+  const handleClick = (link) => {
+    window.open(`https://www.youtube.com/watch?v=${link}`, "_blank").focus();
   };
 
   return (
     <div>
       <h2>YouTube Songs</h2>
       <input type="text" onChange={handleInputChange} />
-      <button onSubmit={fetchData}>Search...</button>
+      <button onSubmit={fetchData()}>Search...</button>
 
       <ul>
         {songs.map((song) => (
           <li key={song.id.videoId}>
             <span>{song.snippet.title}</span>
-            <button>Download</button>
+            <button onClick={() => handleClick(song.id.videoId)}>
+              Download
+            </button>
           </li>
         ))}
       </ul>
@@ -38,24 +44,7 @@ const YouTubeSongs = () => {
 
 export default YouTubeSongs;
 
-// .then((response) => response.blob())
-//   .then((blob) => {
-//     // Create blob link to download
-//     const url = window.URL.createObjectURL(
-//       new Blob([blob]),
-//     );
-//     const link = document.createElement('a');
-//     link.href = url;
-//     link.setAttribute(
-//       'download',
-//       `FileName.pdf`,
-//     );
-
-//     // Append to html link element page
-//     document.body.appendChild(link);
-
-//     // Start download
-//     link.click();
-
-//     // Clean up and remove the link
-//     link.parentNode.removeChild(link);
+// api YT -> client -> którą pobrać ->
+// my używamy fetch do zamiany plików mp4 na mp3 i ich pobieranie:
+// https://ytmp3s.nu/link_do_filmu -> responce ->
+// https://notube.net/pl/youtube-app-v159
