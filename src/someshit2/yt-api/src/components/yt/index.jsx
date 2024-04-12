@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
+import fetchSong from "../../utils.js";
 import axios from "axios";
-import "converter.scss";
+import "./Converter.scss";
 
 const YouTubeSongs = () => {
   const [songs, setSongs] = useState([]);
   const [query, setQuery] = useState("music");
-  const key = "AIzaSyAOYIg-rcUamh9qIOKjwk1lEfdxkl0C1Aw";
+  const key = "AIzaSyAzy1Qf_lhA4snxKLL7FP6EmNGk7euZRIE";
 
   const fetchData = async () => {
     const response = await axios.get(
@@ -14,19 +15,26 @@ const YouTubeSongs = () => {
     setSongs(response.data.items);
   };
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    fetchData();
+  };
+
   const handleInputChange = (event) => {
     setQuery(event.target.value);
   };
 
-  const handleClick = (link) => {
-    window.open(`https://www.youtube.com/watch?v=${link}`, "_blank").focus();
+  const handleClick = (videoId) => {
+    fetchSong();
   };
 
   return (
     <div>
       <h2>YouTube Songs</h2>
-      <input type="text" onChange={handleInputChange} />
-      <button onSubmit={fetchData()}>Search...</button>
+      <form onSubmit={handleSubmit}>
+        <input type="text" onChange={handleInputChange} />
+        <button>Search...</button>
+      </form>
 
       <ul>
         {songs.map((song) => (
