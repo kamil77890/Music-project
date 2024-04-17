@@ -1,7 +1,8 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import "./Converter.scss";
-import getVideo from "../../utils";
+
+import DownloadButton from "../downloadButton";
 
 const YouTubeSongs = () => {
   const [songs, setSongs] = useState([]);
@@ -24,11 +25,6 @@ const YouTubeSongs = () => {
     setQuery(event.target.value);
   };
 
-  const handleDownloadButtonClick = async (videoId) => {
-    const response = await getVideo(videoId);
-    console.log(response);
-  };
-
   return (
     <div>
       <h2>YouTube Songs</h2>
@@ -45,9 +41,10 @@ const YouTubeSongs = () => {
         {songs.map((song) => (
           <li key={song.id.videoId}>
             <span>{song.snippet.title}</span>
-            <button onClick={() => handleDownloadButtonClick(song.id.videoId)}>
-              Download
-            </button>
+            <DownloadButton
+              videoId={song.id.videoId}
+              title={song.snippet.title}
+            />
           </li>
         ))}
       </ul>
@@ -57,7 +54,5 @@ const YouTubeSongs = () => {
 
 export default YouTubeSongs;
 
-// api YT -> client -> którą pobrać ->
-// my używamy fetch do zamiany plików mp4 na mp3 i ich pobieranie:
-// https://ytmp3s.nu/link_do_filmu -> responce ->
-// https://notube.net/pl/youtube-app-v159
+// pobieranie danych z YT do innego komponentu
+// design strony ( pinterest )
