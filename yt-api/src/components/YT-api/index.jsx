@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import "./Converter.scss";
+import getVideo from "../../utils";
 
 const YouTubeSongs = () => {
   const [songs, setSongs] = useState([]);
@@ -16,6 +17,7 @@ const YouTubeSongs = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    getVideo();
     fetchData();
   };
 

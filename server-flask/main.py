@@ -10,17 +10,17 @@ DOWNLOAD_DIR = os.getcwd()
 app = Flask(__name__)
 
 
-@app.route('/mp4', methods=['GET'])
-def get_mp4():
-    video_id = request.args['id']
-    yt = YouTube(f'https://www.youtube.com/watch?v={video_id}')
-    stream = yt.streams.get_highest_resolution()
-    title = yt.title
+# @app.route('/mp4', methods=['GET'])
+# def get_mp4():
+#     video_id = request.args['id']
+#     yt = YouTube(f'https://www.youtube.com/watch?v={video_id}')
+#     stream = yt.streams.get_highest_resolution()
+#     title = yt.title
 
-    filepath = f'{DOWNLOAD_DIR}\\{title}'
-    stream.download(filepath)
-    sleep(0.2)
-    return send_file(f'{filepath}\\{title}.mp4', as_attachment=True)
+#     filepath = f'{DOWNLOAD_DIR}\\{title}'
+#     stream.download(filepath)
+#     sleep(0.2)
+#     return send_file(f'{filepath}\\{title}.mp4', as_attachment=True)
 
 
 @app.route('/mp3', methods=['GET'])
