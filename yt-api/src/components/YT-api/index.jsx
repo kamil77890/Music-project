@@ -5,7 +5,7 @@ import getVideo from "../../utils";
 
 const YouTubeSongs = () => {
   const [songs, setSongs] = useState([]);
-  const [query, setQuery] = useState("music");
+  const [query, setQuery] = useState("something like this");
   const key = "AIzaSyAzy1Qf_lhA4snxKLL7FP6EmNGk7euZRIE";
 
   const fetchData = async () => {
@@ -17,7 +17,6 @@ const YouTubeSongs = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    getVideo();
     fetchData();
   };
 
@@ -25,11 +24,20 @@ const YouTubeSongs = () => {
     setQuery(event.target.value);
   };
 
+  const handleDownloadButtonClick = async (videoId) => {
+    const response = await getVideo(videoId);
+    console.log(response);
+  };
+
   return (
     <div>
       <h2>YouTube Songs</h2>
       <form onSubmit={handleSubmit}>
-        <input type="text" onChange={handleInputChange} />
+        <input
+          type="text"
+          value="something like this"
+          onChange={handleInputChange}
+        />
         <button>Search...</button>
       </form>
 
@@ -37,7 +45,7 @@ const YouTubeSongs = () => {
         {songs.map((song) => (
           <li key={song.id.videoId}>
             <span>{song.snippet.title}</span>
-            <button onClick={() => handleClick(song.id.videoId)}>
+            <button onClick={() => handleDownloadButtonClick(song.id.videoId)}>
               Download
             </button>
           </li>
