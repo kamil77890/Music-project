@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import "./Converter.scss";
-
-import DownloadButton from "../downloadButton";
+import Songs from "../Songs";
 
 const YouTubeSongs = () => {
   const [songs, setSongs] = useState([]);
@@ -36,18 +34,7 @@ const YouTubeSongs = () => {
         />
         <button>Search...</button>
       </form>
-
-      <ul>
-        {songs.map((song) => (
-          <li key={song.id.videoId}>
-            <span>{song.snippet.title}</span>
-            <DownloadButton
-              videoId={song.id.videoId}
-              title={song.snippet.title}
-            />
-          </li>
-        ))}
-      </ul>
+      <Songs songs={songs} />
     </div>
   );
 };

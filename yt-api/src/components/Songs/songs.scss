@@ -1,0 +1,29 @@
+.songs {
+  display: flex;
+  flex-direction: column;
+  list-style-type: none;
+  flex: 1;
+  .song {
+    text-decoration: none;
+    font-size: 13px;
+    .song__info {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 600px;
+      height: 50px;
+      padding: 5px;
+      gap: 20px;
+      margin: 8px;
+      border: 1px #fff solid;
+      border-radius: 5px;
+      background: linear-gradient(to right, #47c997, #2200ff);
+
+      .song__image {
+        width: 80px;
+        height: 50px;
+        margin: 5px;
+      }
+    }
+  }
+}
