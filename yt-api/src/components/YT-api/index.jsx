@@ -4,7 +4,7 @@ import Songs from "../Songs";
 
 const YouTubeSongs = () => {
   const [songs, setSongs] = useState([]);
-  const [query, setQuery] = useState("something like this");
+  const [query, setQuery] = useState("");
   const key = "AIzaSyAzy1Qf_lhA4snxKLL7FP6EmNGk7euZRIE";
 
   const fetchData = async () => {
@@ -29,7 +29,7 @@ const YouTubeSongs = () => {
       <form onSubmit={handleSubmit}>
         <input
           type="text"
-          value="something like this"
+          placeholder="Search..."
           onChange={handleInputChange}
         />
         <button>Search...</button>
@@ -40,6 +40,3 @@ const YouTubeSongs = () => {
 };
 
 export default YouTubeSongs;
-
-// pobieranie danych z YT do innego komponentu
-// design strony ( pinterest )
