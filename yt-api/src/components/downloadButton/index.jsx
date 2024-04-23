@@ -6,7 +6,7 @@ function DownloadButton(props) {
   const { videoId, title } = props;
   const handleDownload = async () => {
     const response = await axios.get(
-      `http://83.31.214.159:5000/mp3?id=${videoId}`,
+      `http://127.0.0.1:5000/mp3?id=${videoId}`,
       {
         responseType: "blob",
         headers: { "Access-Control-Allow-Origin": "*" },
