@@ -5,6 +5,9 @@
   list-style-type: none;
   flex: 1;
   margin-top: 200px;
+  & > :hover {
+    background-color: #a0a0a0;
+  }
   .song {
     display: flex;
     flex-direction: column;
@@ -14,6 +17,7 @@
     font-size: 13px;
     border: 1px #ccc solid;
     border-radius: 20px;
+
     .song__image {
       width: 350px;
       height: 200px;

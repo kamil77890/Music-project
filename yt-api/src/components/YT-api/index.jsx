@@ -24,18 +24,20 @@ const YouTubeSongs = () => {
   };
 
   return (
-    <div>
-      <h2>YouTube Songs</h2>
-      <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit}>
+      <div>
+        <h2>YouTube Songs</h2>
+
         <input
           type="text"
           placeholder="Search..."
           onChange={handleInputChange}
         />
         <button>Search...</button>
-      </form>
-      <Songs songs={songs} />
-    </div>
+
+        <Songs songs={songs} />
+      </div>
+    </form>
   );
 };
 

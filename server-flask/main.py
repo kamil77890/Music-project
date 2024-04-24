@@ -19,7 +19,7 @@ def get_mp3():
     stream = yt.streams.filter(only_audio=True).first()
     title = yt.title.replace('"', '_')
 
-    filepath = f'{DOWNLOAD_DIR}/yt-api/public/(1){title}'
+    filepath = f'{DOWNLOAD_DIR}/yt-api/videos/{title}'
     try:
         stream.download(filepath)
         sleep(0.5)
