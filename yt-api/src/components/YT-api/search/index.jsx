@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
-import Songs from "../Songs";
+import Songs from "../../Songs";
+import DetailedData from "../detailedData";
 
 const YouTubeSongs = () => {
   const [songs, setSongs] = useState([]);
@@ -9,7 +10,7 @@ const YouTubeSongs = () => {
 
   const fetchData = async () => {
     const response = await axios.get(
-      `https://www.googleapis.com/youtube/v3/search?key=${key}&part=snippet&type=video&maxResults=10&q=${query}`
+      `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=15&type=video&key=${key}&q=ja`
     );
     setSongs(response.data.items);
   };
@@ -31,14 +32,16 @@ const YouTubeSongs = () => {
         <input
           type="text"
           placeholder="Search..."
+          value={query}
           onChange={handleInputChange}
         />
         <button>Search...</button>
-
-        <Songs songs={songs} />
+        <DetailedData songs={songs} />
       </div>
     </form>
   );
 };
 
 export default YouTubeSongs;
+
+// dane szczegółowe https://www.googleapis.com/youtube/v3/videos?part=snippet,contentDetails&chart=${query}&maxResults=18&eventType=completed&key=${key}

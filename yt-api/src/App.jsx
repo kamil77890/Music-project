@@ -1,5 +1,5 @@
 import { useState } from "react";
-import YouTubeVideos from "./components/YT-api";
+import YouTubeVideos from "./components/YT-api/search";
 import "./App.css";
 
 function App() {
@@ -15,5 +15,3 @@ function App() {
 }
 
 export default App;
-
-
