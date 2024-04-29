@@ -4,11 +4,10 @@ import "./songs.scss";
 
 function Songs(props) {
   const { songs } = props;
-;
 
   const filteredSongs = songs
     .map((song) => ({ ...song, duration: getDuration(song) }))
-    .filter((song) => song.duration.minutes < 8);
+    .filter((song) => song.duration !== null ? song.duration.minutes < 8 : false);
 
   return (
     <ul className="songs">
@@ -22,10 +21,9 @@ function Songs(props) {
           <span className="text">
             <h3>{song.snippet.title.replace("&amp;", "&")}</h3>
             <div>
-              {song.duration.minutes}:
-              {song.duration.seconds.length == 1
+            {song.duration.seconds ? `${song.duration.minutes}:${song.duration.seconds.length == 1
                 ? "0" + song.duration.seconds
-                : song.duration.seconds}
+                : song.duration.seconds}` : 'Unknown length'}
             </div>
           </span>
 
