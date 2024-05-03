@@ -14,6 +14,10 @@
     border-radius: 30px;
     background-color: var(--bg-color);
     padding-bottom: 25px;
+    h2 {
+        font-size: 2.8em;
+        line-height: 0.6;
+    }
     input {
         padding: 5px;
         color: var(--bg-color); // wtf why is the text so dark?

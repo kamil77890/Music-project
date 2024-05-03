@@ -25,7 +25,8 @@ const YouTubeSongs = () => {
       <header>
         <form onSubmit={handleSubmit}>
           <div className="search-box">
-            <h1>YouTube Songs</h1>
+            <h2>YouTube Songs</h2>
+            <span>by kamil77980 & bambus80</span>
             <input
               type="text"
               placeholder="Search..."
