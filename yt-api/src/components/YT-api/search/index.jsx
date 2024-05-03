@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
-import Songs from "../../Songs";
 import DetailedData from "../detailedData";
+import "./search.scss";
 
 const YouTubeSongs = () => {
   const [songs, setSongs] = useState([]);
@@ -20,25 +20,24 @@ const YouTubeSongs = () => {
     fetchData();
   };
 
-  const handleInputChange = (event) => {
-    setQuery(event.target.value);
-  };
-
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <h2>YouTube Songs</h2>
-
-        <input
-          type="text"
-          placeholder="Search..."
-          value={query}
-          onChange={handleInputChange}
-        />
-        <button>Search...</button>
-        <DetailedData songs={songs} />
-      </div>
-    </form>
+    <>
+      <header>
+        <form onSubmit={handleSubmit}>
+          <div className="search-box">
+            <h1>YouTube Songs</h1>
+            <input
+              type="text"
+              placeholder="Search..."
+              value={query}
+              onChange={(event) => setQuery(event.target.value)}
+            />
+            <button>Search</button>
+          </div>
+        </form>
+      </header>
+      <DetailedData songs={songs} />
+    </>
   );
 };
 
