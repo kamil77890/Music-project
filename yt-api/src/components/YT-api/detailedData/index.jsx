@@ -27,7 +27,7 @@ const DetailedData = (props) => {
     }
   }, [songs]);
 
-  return <section>{<Songs songs={music} />}</section>; //lepier rozplanować alie działa :)
+  return <section>{<Songs songs={music} />}</section>;
 };
 
 export default DetailedData;

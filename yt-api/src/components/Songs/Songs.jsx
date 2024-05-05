@@ -1,14 +1,13 @@
-import DownloadButton from "../downloadButton";
+import DownloadButton from "../DownloadButton";
 import { getDuration } from "../../utils";
 import "./songs.scss";
 
 function Songs(props) {
   const { songs } = props;
-;
-
   const filteredSongs = songs
     .map((song) => ({ ...song, duration: getDuration(song) }))
-    .filter((song) => song.duration.minutes < 8);
+    .filter((song) => song.duration.minutes < 8)
+    .filter((song) => !song.snippet.title.includes("#"));
 
   return (
     <ul className="songs">
@@ -18,7 +17,7 @@ function Songs(props) {
             src={song.snippet.thumbnails.high.url}
             alt="img"
             className="song__image"
-          />
+          />  
           <span className="text">
             <h3>{song.snippet.title.replace("&amp;", "&")}</h3>
             <div>
@@ -29,10 +28,7 @@ function Songs(props) {
             </div>
           </span>
 
-          <DownloadButton
-            videoId={song.id.videoId}
-            title={song.snippet.title}
-          />
+          <DownloadButton videoId={song.id} title={song.snippet.title} />
         </div>
       ))}
     </ul>

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import YouTubeVideos from "./components/YT-api/search";
+import YouTubeVideos from "./components/YT-api";
 import "./App.css";
 
 function App() {
