@@ -1,12 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
-<<<<<<< HEAD:yt-api/src/components/YT-api/index.jsx
-import DetailedData from "./detailedData";
 import SearchInput from "../SearchInput";
-=======
-import DetailedData from "../detailedData";
+import DetailedData from "./DetailedData";
 import "./search.scss";
->>>>>>> 43dbf38d933149f2c5e43a6a3edf92543af70633:yt-api/src/components/YT-api/search/index.jsx
 
 const YouTubeSongs = () => {
   const [songs, setSongs] = useState([]);
@@ -26,37 +22,20 @@ const YouTubeSongs = () => {
   };
 
   return (
-<<<<<<< HEAD:yt-api/src/components/YT-api/index.jsx
-    <div>
-      <h2>YouTube Songs</h2>
-      <span>by kamil77980 & bambus80</span>
-      <SearchInput
-        query={query}
-        onInputChange={handleInputChange}
-        onFormSubmit={handleSubmit}
-      />
-      <DetailedData songs={songs} />
-    </div>
-=======
     <>
       <header>
-        <form onSubmit={handleSubmit}>
-          <div className="search-box">
-            <h2>YouTube Songs</h2>
-            <span>by kamil77980 & bambus80</span>
-            <input
-              type="text"
-              placeholder="Search..."
-              value={query}
-              onChange={(event) => setQuery(event.target.value)}
-            />
-            <button>Search</button>
-          </div>
-        </form>
+        <h2>YouTube Songs</h2>
+        <span>by kamil77980 & bambus80</span>
+        <SearchInput
+          query={query}
+          onInputChange={(event) => setQuery(event.target.value)}
+          onFormSubmit={handleSubmit}
+        />
       </header>
-      <DetailedData songs={songs} />
+      <main>
+        <DetailedData songs={songs} />
+      </main>
     </>
->>>>>>> 43dbf38d933149f2c5e43a6a3edf92543af70633:yt-api/src/components/YT-api/search/index.jsx
   );
 };
 

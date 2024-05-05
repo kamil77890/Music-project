@@ -1,9 +1,10 @@
 import React from "react";
+import "./Input.scss";
 
 const SearchInput = (props) => {
   const { query, onInputChange, onFormSubmit } = props;
   return (
-    <form onSubmit={onFormSubmit}>
+    <form className="search-box" onSubmit={onFormSubmit}>
       <input
         type="text"
         placeholder="Search..."

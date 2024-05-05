@@ -1,5 +1,4 @@
 export const getDuration = (song) => {
-<<<<<<< HEAD
   // Ensure song and song.contentDetails.duration exist
   if (!song || !song.contentDetails || !song.contentDetails.duration) {
     console.error("Invalid song data");
@@ -26,12 +25,10 @@ export const getDuration = (song) => {
     minutes: totalMinutes.toString(), // Return total minutes as string
     seconds: seconds, // Return seconds as string
   };
-=======
-  const re = /PT(\d+)M(\d+)S/;
+  /* const re = /PT(\d+)M(\d+)S/;
   let [uselsessShit, minutes, seconds] = new Array(3).fill(undefined);
   if (song.contentDetails.duration.match(re)) {
     [uselsessShit, minutes, seconds] = song.contentDetails.duration.match(re);
   };
-  return seconds !== undefined ? {minutes, seconds} : null;
->>>>>>> 43dbf38d933149f2c5e43a6a3edf92543af70633
+  return seconds !== undefined ? {minutes, seconds} : null; */
 };

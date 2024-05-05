@@ -15,6 +15,7 @@
     transition: 0.1s;
     background-color: #a0a0a0;
   }
+
   .song {
     display: flex;
     padding: 10px;
@@ -25,12 +26,21 @@
     text-decoration: none;
     font-size: 13px;
     border-radius: 20px;
-    .song__image {
-      width: 320px;
-      height: 240px;
-    }
-    img {
-      border-radius: 10px;
+    .song__img__component {
+      position: relative;
+      .time {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        padding-right: 2px;
+      }
+      .song__image {
+        width: 320px;
+        height: 240px;
+      }
+      img {
+        border-radius: 10px;
+      }
     }
   }
   button {
@@ -41,5 +51,5 @@
   button:hover {
     background-color: var(--accent-color-hover);
     transition: 0.15s;
-  }   
+  }
 }
