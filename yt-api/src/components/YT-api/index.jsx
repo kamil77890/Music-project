@@ -29,6 +29,7 @@ const YouTubeSongs = () => {
 <<<<<<< HEAD:yt-api/src/components/YT-api/index.jsx
     <div>
       <h2>YouTube Songs</h2>
+      <span>by kamil77980 & bambus80</span>
       <SearchInput
         query={query}
         onInputChange={handleInputChange}

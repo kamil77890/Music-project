@@ -5,9 +5,12 @@ import "./songs.scss";
 function Songs(props) {
   const { songs } = props;
 <<<<<<< HEAD
+  /* Filter out videos that:
+    1. Are longer than 8 minutes
+    2. Are shorts (we cannot get their length and we can't download them) */
   const filteredSongs = songs
     .map((song) => ({ ...song, duration: getDuration(song) }))
-    .filter((song) => song.duration.minutes < 8)
+    .filter((song) => song.duration !== null ? song.duration.minutes < 8 : false)    
     .filter((song) => !song.snippet.title.includes("#"));
 =======
 
