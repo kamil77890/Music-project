@@ -5,11 +5,12 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background: linear-gradient(
+  background-color: #2a2d3b;
+  /* background: linear-gradient(
     180deg,
     rgba(0, 0, 0, 1) 0%,
     rgba(8, 80, 95, 1) 100%
-  );
+  ); */
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -34,11 +35,6 @@ body {
   min-height: 100vh;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
 button {
   border-radius: 8px;
   border: 1px solid transparent;
@@ -49,9 +45,6 @@ button {
   background-color: #1a1a1a;
   cursor: pointer;
   transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
 }
 button:focus,
 button:focus-visible {
