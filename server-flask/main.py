@@ -3,7 +3,7 @@ from time import sleep
 from flask import Flask, request, send_file, Response
 from flask_cors import CORS
 from pytube import YouTube
-from pytube.exceptions import LiveStreamError
+
 
 DOWNLOAD_DIR = os.getcwd()
 

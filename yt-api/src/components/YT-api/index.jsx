@@ -23,8 +23,8 @@ const YouTubeSongs = () => {
 
   return (
     <>
-      <header>
-        <h2>YouTube Songs</h2>
+      <header className="nav">
+        <h2 className="title">YouTube Songs</h2>
         <span>by kamil77980 & bambus80</span>
         <SearchInput
           query={query}
@@ -32,7 +32,7 @@ const YouTubeSongs = () => {
           onFormSubmit={handleSubmit}
         />
       </header>
-      <main>
+      <main className="songs">
         <DetailedData songs={songs} />
       </main>
     </>

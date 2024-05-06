@@ -1,55 +1,38 @@
-:root {
-  --bg-color: rgb(68, 88, 117);
-  --bg-color-dark: rgb(44, 57, 76);
-  --accent-color: rgb(108, 175, 190);
-  --accent-color-hover: rgb(150, 194, 204);
-}
 .songs {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
   list-style-type: none;
-  flex: 1;
-  margin-top: 200px;
-  & > :hover {
-    transition: 0.1s;
-    background-color: #a0a0a0;
-  }
 
   .song {
     display: flex;
     padding: 10px;
-    background-color: var(--bg-color);
+    background-color: rgb(68, 88, 117);
     flex-direction: column;
     align-items: center;
-    flex: 1;
     text-decoration: none;
     font-size: 13px;
     border-radius: 20px;
+
     .song__img__component {
       position: relative;
+
       .time {
         position: absolute;
         bottom: 0;
         right: 0;
         padding-right: 2px;
       }
+
       .song__image {
         width: 320px;
         height: 240px;
+        border-radius: 10px;
       }
+
       img {
         border-radius: 10px;
       }
     }
-  }
-  button {
-    background-color: var(--accent-color);
-    border-radius: 20px;
-    transition: 0.15s;
-  }
-  button:hover {
-    background-color: var(--accent-color-hover);
-    transition: 0.15s;
   }
 }
