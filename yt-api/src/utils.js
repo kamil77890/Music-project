@@ -11,7 +11,6 @@ export const getDuration = (song) => {
       seconds: seconds,
   };
   } else {
-    console.error("Duration format not recognized:", duration);
     return { minutes: undefined, seconds: undefined };
   }
 };

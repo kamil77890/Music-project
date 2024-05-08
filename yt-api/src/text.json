@@ -1,14 +1,18 @@
-{
-  "pl": {
-    "search": "Wyszukaj",
-    "download": "Pobierz",
-    "header": "Youtube Songs",
-    "credits": "Tworzone przez kamil77980 i bambus80"
+[
+  {
+    "pl": {
+      "header": "Youtube Songs",
+      "credits": "przez kamil77980 i bambus80",
+      "search": "Wyszukaj",
+      "download": "Pobierz"
+    }
   },
-  "en": {
-    "search": "Search",
-    "download": "Download",
-    "header": "Youtube Songs",
-    "credits": "by kamil77980 & bambus80"
+  {
+    "en": {
+      "header": "Youtube Songs",
+      "credits": "by kamil77980 & bambus80",
+      "search": "Search",
+      "download": "Download"      
+    }
   }
-}
+]

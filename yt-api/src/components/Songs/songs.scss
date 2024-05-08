@@ -1,8 +1,10 @@
 .songs {
   display: grid;
+  place-items: center;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
   list-style-type: none;
+  padding-top: 20px;
 
   .song {
     display: flex;

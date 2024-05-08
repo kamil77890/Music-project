@@ -7,8 +7,7 @@ function Songs(props) {
 
   const filteredSongs = songs
     .map((song) => ({ ...song, duration: getDuration(song) }))
-    .filter((song) => song.duration.minutes < 8)
-    .filter((song) => song.duration.minutes > 1)
+    .filter((song) => song.duration.minutes > 1 || song.duration.minutes < 8)
     .filter((song) => !song.snippet.title.includes("#"));
 
   return (

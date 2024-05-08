@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import SearchInput from "../SearchInput";
-import DetailedData from "./DetailedData";
+import DetailedData from "./detailedData";
 import "./search.scss";
 
 const YouTubeSongs = () => {

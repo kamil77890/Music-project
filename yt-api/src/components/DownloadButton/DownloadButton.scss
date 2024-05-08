@@ -1,0 +1,14 @@
+button {
+  background-color: rgb(108, 175, 190);
+  border-radius: 20px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  transition: 0.15s;
+  & > :hover {
+    background-color: rgb(68, 88, 117);
+    transition: 0.15s;
+  }
+}
