@@ -3,6 +3,7 @@ import React from "react";
 import { saveAs } from "file-saver";
 import { useLanguageContext } from "../../contexts/LanguageContext";
 import "./DownloadButton.scss"
+import PropTypes from "prop-types"
 
 function DownloadButton(props) {
   const { getString } = useLanguageContext();
@@ -24,7 +25,7 @@ function DownloadButton(props) {
 
 export default DownloadButton;
 
-/* DownloadButton.propTypes = {
+DownloadButton.propTypes = {
     videoId: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
-}; */
+};

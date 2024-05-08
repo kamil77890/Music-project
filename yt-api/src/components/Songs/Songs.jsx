@@ -1,6 +1,7 @@
 import DownloadButton from "../DownloadButton";
 import { getDuration } from "../../utils";
 import "./songs.scss";
+import PropTypes from "prop-types"
 
 function Songs(props) {
   const { songs } = props;
@@ -39,3 +40,7 @@ function Songs(props) {
 }
 
 export default Songs;
+
+Songs.PropTypes = {
+  songs: PropTypes.object.isRequired
+};

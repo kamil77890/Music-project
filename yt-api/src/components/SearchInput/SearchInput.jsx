@@ -1,5 +1,6 @@
 import React from "react";
 import "./Input.scss";
+import PropTypes from "prop-types"
 
 const SearchInput = (props) => {
   const { query, onInputChange, onFormSubmit } = props;
@@ -17,3 +18,9 @@ const SearchInput = (props) => {
 };
 
 export default SearchInput;
+
+SearchInput.propTypes = {
+  query: PropTypes.string.isRequired,
+  onInputChange: PropTypes.func.isRequired,
+  onFormSubmit: PropTypes.func.isRequired
+};

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Songs from "../../Songs";
+import PropTypes from "prop-types"
 
 const DetailedData = (props) => {
   const { songs } = props;
@@ -31,3 +32,7 @@ const DetailedData = (props) => {
 };
 
 export default DetailedData;
+
+DetailedData.propTypes = {
+  songs: PropTypes.array.isRequired
+};
