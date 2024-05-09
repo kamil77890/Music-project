@@ -4,32 +4,46 @@
 
   -bambus80
 */
-import { createContext, useContext, useRef, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import axios from "axios";
 
 const LanguageContext = createContext();
 
 const fetchStrings = async () => {
-  const response = await axios.get("../../text.json"); //.then((response) => response.data);
+  const response = await axios.get("src/strings.json");
   return response.data;
 };
 
-const getString = (text) => {
-  return "Download";
-};
+const allLanguages = { pl: "🇵🇱 Polski", en: "🇬🇧 English" };
 
 const useLanguageContext = () => useContext(LanguageContext);
 
 const LanguageProvider = (props) => {
-  const stringsRef = useRef({});
-  const [lang, setLang] = useState("pl");
-  stringsRef.current = fetchStrings();
-  console.log(stringsRef);
+  const [strings, setStrings] = useState(undefined);
 
-  const { children } = props;
+  useEffect(() => {
+    const fetchData = async () => {
+      setStrings(await fetchStrings());
+    };
+    fetchData();
+  }, []);
+
+  const [lang, setLang] = useState("pl");
+  console.log(strings);
+
+  /* 
+    this function is for getting language-specific strings
+    these are defined in src/strings.json
+  */
+  const getString = (text) => {
+    return strings ? strings[lang][text] : "Loading text...";
+  };
+
   return (
-    <LanguageContext.Provider value={{ lang, setLang, getString }}>
-      {children}
+    <LanguageContext.Provider
+      value={{ lang, allLanguages, setLang, getString }}
+    >
+      {props.children}
     </LanguageContext.Provider>
   );
 };

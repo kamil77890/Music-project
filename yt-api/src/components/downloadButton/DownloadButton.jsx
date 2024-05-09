@@ -26,6 +26,6 @@ function DownloadButton(props) {
 export default DownloadButton;
 
 DownloadButton.propTypes = {
-    videoId: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
+  videoId: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
 };

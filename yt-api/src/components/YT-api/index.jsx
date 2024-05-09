@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import axios from "axios";
 import SearchInput from "../SearchInput";
 import DetailedData from "./detailedData";
+import { useLanguageContext } from "../../contexts/LanguageContext";
 import "./search.scss";
 
 const YouTubeSongs = () => {
+  const { getString } = useLanguageContext();
   const [songs, setSongs] = useState([]);
   const [query, setQuery] = useState("");
   const key = "AIzaSyAzy1Qf_lhA4snxKLL7FP6EmNGk7euZRIE";
@@ -24,8 +26,8 @@ const YouTubeSongs = () => {
   return (
     <>
       <header className="nav">
-        <h2 className="title">YouTube Songs</h2>
-        <span>by kamil77980 & bambus80</span>
+        <h2 className="title">{getString("header")}</h2>
+        <span>{getString("credits")}</span>
         <SearchInput
           query={query}
           onInputChange={(event) => setQuery(event.target.value)}
