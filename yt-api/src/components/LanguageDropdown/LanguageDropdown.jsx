@@ -11,12 +11,9 @@ const LanguageDropdown = () => {
         <Dropdown.Toggle className="dropdown-button">🌍</Dropdown.Toggle>
         <Dropdown.Menu>
           {Object.keys(allLanguages).map((option) => (
-            <Dropdown.Item
-              className="language-button"
-              onClick={() => setLang(option)}
-            >
+            <button className="language-button" onClick={() => setLang(option)}>
               {allLanguages[option]}
-            </Dropdown.Item>
+            </button>
           ))}
         </Dropdown.Menu>
       </Dropdown>

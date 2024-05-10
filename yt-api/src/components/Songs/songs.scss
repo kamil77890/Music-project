@@ -4,20 +4,23 @@
   grid-template-columns: repeat(3, 1fr);
   @media screen and (max-width: 1200px) {
     grid-template-columns: repeat(2, 1fr);
-    padding: 0 20px;
   }
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 850px) {
     grid-template-columns: 1fr;
-    padding: 0 20px;
   }
+  padding: 0 20px;
   gap: 20px;
   list-style-type: none;
-  padding-top: 20px;
+  padding: 20px;
 
   .song {
     display: flex;
     padding: 10px;
     height: 375px;
+    width: 330px;
+    @media screen and (max-width: 850px) {
+      width: 100%;
+    }
     background-color: rgb(68, 88, 117);
     flex-direction: column;
     align-items: center;
@@ -27,7 +30,10 @@
 
     .song__img__component {
       position: relative;
-
+      @media screen and (max-width: 850px) {
+        width: 70%;
+        height: 70%;
+      }
       .time {
         position: absolute;
         bottom: 0;
@@ -38,6 +44,10 @@
       .song__image {
         width: 320px;
         height: 240px;
+        @media screen and (max-width: 850px) {
+          width: 100%;
+          height: 100%;
+        }
         border-radius: 10px;
       }
 

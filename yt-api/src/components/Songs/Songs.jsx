@@ -1,7 +1,7 @@
 import DownloadButton from "../DownloadButton";
 import { getDuration } from "../../utils";
 import "./songs.scss";
-import PropTypes from "prop-types"
+import PropTypes from "prop-types";
 
 function Songs(props) {
   const { songs } = props;
@@ -12,7 +12,7 @@ function Songs(props) {
     .filter((song) => !song.snippet.title.includes("#"));
 
   return (
-    <ul className="songs">
+    <main className="songs">
       {filteredSongs.map((song) => (
         <div className="song">
           <div className="song__img__component">
@@ -35,12 +35,12 @@ function Songs(props) {
           <DownloadButton videoId={song.id} title={song.snippet.title} />
         </div>
       ))}
-    </ul>
+    </main>
   );
 }
 
 export default Songs;
 
 Songs.PropTypes = {
-  songs: PropTypes.object.isRequired
+  songs: PropTypes.object.isRequired,
 };

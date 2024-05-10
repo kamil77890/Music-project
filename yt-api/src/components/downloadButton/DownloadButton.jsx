@@ -2,8 +2,8 @@ import axios from "axios";
 import React from "react";
 import { saveAs } from "file-saver";
 import { useLanguageContext } from "../../contexts/LanguageContext";
-import "./DownloadButton.scss"
-import PropTypes from "prop-types"
+import "./DownloadButton.scss";
+import PropTypes from "prop-types";
 
 function DownloadButton(props) {
   const { getString } = useLanguageContext();
@@ -20,7 +20,11 @@ function DownloadButton(props) {
     saveAs(response.data, `${title}.mp3`);
   };
 
-  return <button onClick={handleDownload}>{getString('download')}</button>;
+  return (
+    <button className="download-button" onClick={handleDownload}>
+      {getString("download")}
+    </button>
+  );
 }
 
 export default DownloadButton;

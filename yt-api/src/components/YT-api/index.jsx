@@ -26,7 +26,10 @@ const YouTubeSongs = () => {
   return (
     <>
       <header className="nav">
-        <h2 className="title">{getString("header")}</h2>
+        <div>
+          <img className="favicon" src="favicon.svg" alt="Logo" />
+          <h2 className="title">{getString("header")}</h2>
+        </div>
         <span>{getString("credits")}</span>
         <SearchInput
           query={query}
@@ -34,9 +37,7 @@ const YouTubeSongs = () => {
           onFormSubmit={handleSubmit}
         />
       </header>
-      <main className="songs">
-        <DetailedData songs={songs} />
-      </main>
+      <DetailedData songs={songs} />
     </>
   );
 };

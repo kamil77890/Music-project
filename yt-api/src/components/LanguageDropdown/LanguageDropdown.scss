@@ -1,16 +1,22 @@
 .dropdown-menu {
+  display: none;
+}
+.show {
   display: flex;
   flex-direction: column;
-  width: 100%;
-  padding-right: 100px;
   & > .language-button {
+    padding-right: 10px;
+    width: 100%;
+    margin: 8px;
     background-color: rgb(108, 175, 190);
     transition: 0.15s;
     font-size: 20px;
     color: white;
+    width: 150px;
+    border-radius: 30px;
     & > :hover {
-        background-color: rgb(68, 88, 117);
-        transition: 0.15s;
+      background-color: rgb(68, 88, 117);
+      transition: 0.15s;
     }
   }
 }
