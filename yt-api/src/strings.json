@@ -12,5 +12,12 @@
     "search": "Search",
     "search-box": "Search...",
     "download": "Download"
+  },
+  "cn": {
+    "header": "Youtube Songs",
+    "credits": "制作者 kamil77980 和 bambus80",
+    "search": "搜索",
+    "search-box": "搜索...",
+    "download": "下载"
   }
 }

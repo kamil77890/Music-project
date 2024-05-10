@@ -1,9 +1,3 @@
-/*
-   sorry for this spaghetti code, i ate some spaghetti in
-  the morning so now you have to experience this.
-
-  -bambus80
-*/
 import { createContext, useContext, useEffect, useState } from "react";
 import axios from "axios";
 
@@ -14,7 +8,7 @@ const fetchStrings = async () => {
   return response.data;
 };
 
-const allLanguages = { pl: "🇵🇱 Polski", en: "🇬🇧 English" };
+const allLanguages = { pl: "🇵🇱 Polski", en: "🇬🇧 English", cn: "🇨🇳 中文" };
 
 const useLanguageContext = () => useContext(LanguageContext);
 
@@ -31,10 +25,7 @@ const LanguageProvider = (props) => {
   const [lang, setLang] = useState("pl");
   console.log(strings);
 
-  /* 
-    this function is for getting language-specific strings
-    these are defined in src/strings.json
-  */
+  // look in src/strings.json for avaliable parameters
   const getString = (text) => {
     return strings ? strings[lang][text] : "Loading text...";
   };
