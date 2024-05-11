@@ -11,11 +11,14 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@ionic/react": "^8.1.1",
     "@yohancolla/ytdl": "^1.2.0",
     "axios": "^1.6.8",
+    "bootstrap": "^5.3.3",
     "file-save": "^0.2.0",
     "file-saver": "^2.0.5",
     "fluent-ffmpeg": "^2.1.2",
+    "jquery": "^3.7.1",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-bootstrap": "^2.10.2",

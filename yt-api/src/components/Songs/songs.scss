@@ -8,10 +8,10 @@
   @media screen and (max-width: 850px) {
     grid-template-columns: 1fr;
   }
-  padding: 0 20px;
   gap: 20px;
   list-style-type: none;
   padding: 20px;
+  margin-bottom: 200px;
 
   .song {
     display: flex;

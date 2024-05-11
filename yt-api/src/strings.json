@@ -3,21 +3,21 @@
     "header": "Youtube Songs",
     "credits": "przez kamil77980 i bambus80",
     "search": "Wyszukaj",
-    "search-box": "Wyszukaj...",
+    "search-box": "Wyszukaj stwoje ulubione piosenki...",
     "download": "Pobierz"
   },
   "en": {
     "header": "Youtube Songs",
     "credits": "by kamil77980 & bambus80",
     "search": "Search",
-    "search-box": "Search...",
+    "search-box": "Search for your favorite songs...",
     "download": "Download"
   },
   "cn": {
     "header": "Youtube Songs",
     "credits": "制作者 kamil77980 和 bambus80",
     "search": "搜索",
-    "search-box": "搜索...",
+    "search-box": "搜索您喜爱的歌曲...",
     "download": "下载"
   }
 }
