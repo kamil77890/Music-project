@@ -1,22 +1,22 @@
 .dropdown-menu {
   display: none;
+  background-color: rgb(3, 6, 10);
+  border-radius: 20px;
+  padding: 4px;
+  margin-left: 3px;
+  align-items: center;
 }
+
 .show {
   display: flex;
   flex-direction: column;
-  & > .language-button {
-    padding-right: 10px;
-    width: 100%;
-    margin: 8px;
-    background-color: rgb(108, 175, 190);
+  align-items: center;
+  z-index: 999;
+
+  .language-button {
     transition: 0.15s;
-    font-size: 20px;
+    font-size: 14px;
     color: white;
-    width: 150px;
-    border-radius: 30px;
-    & > :hover {
-      background-color: rgb(68, 88, 117);
-      transition: 0.15s;
-    }
+    background-color: transparent;
   }
 }

@@ -14,7 +14,7 @@ function Songs(props) {
   return (
     <main className="songs">
       {filteredSongs.map((song) => (
-        <div className="song">
+        <div className="song" key={song.id}>
           <div className="song__img__component">
             <img
               src={song.snippet.thumbnails.high.url}
@@ -32,6 +32,7 @@ function Songs(props) {
           <span className="text">
             <h3>{song.snippet.title.replace("&amp;", "&")}</h3>
           </span>
+
           <DownloadButton videoId={song.id} title={song.snippet.title} />
         </div>
       ))}

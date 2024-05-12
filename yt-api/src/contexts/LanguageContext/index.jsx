@@ -8,7 +8,7 @@ const fetchStrings = async () => {
   return response.data;
 };
 
-const allLanguages = { pl: "🇵🇱 Polski", en: "🇬🇧 English", cn: "🇨🇳 中文" };
+const allLanguages = { pl: "🇵🇱 ", en: "🇬🇧 ", cn: "🇨🇳 " };
 
 const useLanguageContext = () => useContext(LanguageContext);
 

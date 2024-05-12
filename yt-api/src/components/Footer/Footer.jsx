@@ -9,6 +9,23 @@ import "./Footer.css";
 
 function Footer() {
   const [isHovered, setIsHovered] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 200) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   const handleMouseEnter = () => {
     setIsHovered(true);
@@ -20,7 +37,7 @@ function Footer() {
 
   return (
     <div
-      className={`styles ${isHovered ? "active" : "disable"}`}
+      className={`styles ${(isHovered, scrolled ? "active" : "disable")} `}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >

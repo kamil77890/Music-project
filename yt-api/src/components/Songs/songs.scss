@@ -19,7 +19,7 @@
     height: 375px;
     width: 330px;
     @media screen and (max-width: 850px) {
-      width: 100%;
+      width: 80%;
     }
     background-color: rgb(68, 88, 117);
     flex-direction: column;
@@ -31,8 +31,8 @@
     .song__img__component {
       position: relative;
       @media screen and (max-width: 850px) {
-        width: 70%;
-        height: 70%;
+        width: 60%;
+        height: 60%;
       }
       .time {
         position: absolute;
