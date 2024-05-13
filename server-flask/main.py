@@ -22,7 +22,7 @@ def get_mp3():
     filepath = f'{DOWNLOAD_DIR}/yt-api/videos/{title}'
     try:
         stream.download(filepath)
-        sleep(0.5)
+        sleep(1)
         os.rename(f'{filepath}/{title}.mp4', f'{filepath}/{title}.mp3')
         sleep(0.5)
 
