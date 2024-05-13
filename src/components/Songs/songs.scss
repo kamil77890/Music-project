@@ -2,7 +2,7 @@
   display: grid;
   place-items: center;
   grid-template-columns: repeat(3, 1fr);
-  @media screen and (max-width: 1200px) {
+  @media screen and (max-width: 1280px) {
     grid-template-columns: repeat(2, 1fr);
   }
   @media screen and (max-width: 850px) {
@@ -30,10 +30,7 @@
 
     .song__img__component {
       position: relative;
-      @media screen and (max-width: 850px) {
-        width: 60%;
-        height: 60%;
-      }
+      
       .time {
         position: absolute;
         bottom: 0;
@@ -44,10 +41,7 @@
       .song__image {
         width: 320px;
         height: 240px;
-        @media screen and (max-width: 850px) {
-          width: 100%;
-          height: 100%;
-        }
+        
         border-radius: 10px;
       }
 

@@ -73,7 +73,7 @@ function Footer() {
             <a href="#">Privacy Policy</a>
           </li>
         </ul>
-        <p className="copyright">Company Name © 2024</p>
+        <p className="copyright">© Kamil & Bambus Sp.z o.o. 2024</p>
       </footer>
     </div>
   );
