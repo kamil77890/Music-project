@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import SearchInput from "../SearchInput";
-import DetailedData from "./detailedData";
+import DetailedData from "./DetailedData";
 import { useLanguageContext } from "../../contexts/LanguageContext";
 import "./search.scss";
 
