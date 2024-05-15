@@ -1,0 +1,15 @@
+.theme-switch {
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  color: var(--main-color);
+  display: flex;
+  justify-content: end;
+  align-items: center;
+
+  &.fill {
+    svg {
+      fill: var(--main-color);
+    }
+  }
+}

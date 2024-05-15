@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import SearchInput from "../SearchInput";
 import DetailedData from "./DetailedData";
 import { useLanguageContext } from "../../contexts/LanguageContext";
+import { useParams } from "react-router-dom";
+import ThemeSwitch from "../ThemeSwitch";
 import "./search.scss";
 
 const YouTubeSongs = () => {
@@ -10,6 +12,14 @@ const YouTubeSongs = () => {
   const [songs, setSongs] = useState([]);
   const [query, setQuery] = useState("");
   const key = "AIzaSyAzy1Qf_lhA4snxKLL7FP6EmNGk7euZRIE";
+  const { query: searchQuery } = useParams();
+
+  useEffect(() => {
+    if (searchQuery) {
+      setQuery(searchQuery);
+      fetchData();
+    }
+  }, [searchQuery]);
 
   const fetchData = async () => {
     const response = await axios.get(
@@ -27,16 +37,18 @@ const YouTubeSongs = () => {
     <>
       <header className="nav">
         <div>
+          <ThemeSwitch />
           <img className="favicon" src="favicon.svg" alt="Logo" />
           <h2 className="title">{getString("header")}</h2>
         </div>
-        <span>{getString("credits")}</span>
+
         <SearchInput
           query={query}
           onInputChange={(event) => setQuery(event.target.value)}
           onFormSubmit={handleSubmit}
         />
       </header>
+
       <DetailedData songs={songs} />
     </>
   );

@@ -1,3 +1,5 @@
+import React, { useRef } from "react";
+import { useParams } from "react-router-dom";
 import DownloadButton from "../DownloadButton";
 import { getDuration } from "../../utils";
 import "./songs.scss";
@@ -5,6 +7,7 @@ import PropTypes from "prop-types";
 
 function Songs(props) {
   const { songs } = props;
+  const song = useRef();
 
   const filteredSongs = songs
     .map((song) => ({ ...song, duration: getDuration(song) }))
@@ -14,7 +17,7 @@ function Songs(props) {
   return (
     <main className="songs">
       {filteredSongs.map((song) => (
-        <div className="song" key={song.id}>
+        <div className="song" key={song.id} ref={song}>
           <div className="song__img__component">
             <img
               src={song.snippet.thumbnails.high.url}
@@ -23,7 +26,7 @@ function Songs(props) {
             />
             <p className="time">
               {song.duration.minutes}:
-              {song.duration.seconds.length == 1
+              {song.duration.seconds.length === 1
                 ? "0" + song.duration.seconds
                 : song.duration.seconds}
             </p>
@@ -40,8 +43,8 @@ function Songs(props) {
   );
 }
 
-export default Songs;
-
-Songs.PropTypes = {
-  songs: PropTypes.object.isRequired,
+Songs.propTypes = {
+  songs: PropTypes.array.isRequired,
 };
+
+export default Songs;
