@@ -1,12 +1,27 @@
+.light {
+  --background: #c2d8ff;
+  --input-background: #c0dbff;
+  --input-text: #19212f;
+  --input-frame-background: rgb(144, 182, 231);
+  --input-frame-background-hover: #5d84bb;
+}
+.dark {
+  --background: #19212f;
+  --input-background: #3e618f;
+  --input-text: rgb(108, 175, 190);
+  --input-frame-background: rgb(108, 175, 190);
+  --input-frame-background-hover: #526d91;
+}
+
 .search-box {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   width: 100vw;
-  background-color: #19212f;
+  background-color: var(--background);
   padding: 50px 0;
-  color: #061b31;
+  color: var(--input-text);
   overflow: hidden;
   transition: padding 0.5s;
 
@@ -19,14 +34,14 @@
     width: 500px;
     height: 40px;
     padding: 10px;
-    background-color: #3e618f;
+    background-color: var(--input-background);
     border: none;
     border-radius: 20px;
     font-size: 16px;
-    color: #fff;
+    color: var(--input-text);
     margin: 20px;
     &::placeholder {
-      color: #b0d1ff;
+      color: var(--input-text);
     }
     @media screen and (max-width: 850px) {
       width: 270px;
@@ -35,7 +50,7 @@
 
   button {
     padding: 10px 20px;
-    background-color: rgb(108, 175, 190);
+    background-color: var(--input-frame-background);
     border-radius: 20px;
     font-size: 16px;
     font-weight: 600;
@@ -45,7 +60,7 @@
     transition: background-color 0.15s ease-in-out;
 
     &:hover {
-      background-color: rgb(68, 88, 117);
+      background-color: var(--input-frame-background-hover);
     }
   }
 }

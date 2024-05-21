@@ -1,9 +1,11 @@
-#root {
+.app {
   max-width: 1280px;
   margin: 0 auto;
   padding-top: 32px;
   text-align: center;
   &:not(.dark) {
+    --global-bg: #f1f4ff;
+    --global-text: #000;
     --app-container: #f3f6fd;
     --main-color: #1f1c2e;
     --secondary-color: #4a4a4a;
@@ -24,6 +26,8 @@
   }
 
   &.dark {
+    --global-bg: #2a2d3b;
+    --global-text: #fff;
     --app-container: #111827;
     --main-color: #fff;
     --secondary-color: rgba(255, 255, 255, 0.8);
@@ -42,6 +46,7 @@
     --more-list-shadow: rgba(195, 207, 244, 0.1);
     --message-btn: rgba(195, 207, 244, 0.1);
   }
+  background-color: var(--global-bg);
 }
 
 .logo {

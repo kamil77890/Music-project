@@ -1,11 +1,13 @@
 import axios from "axios";
-import React from "react";
+import React, { useContext } from "react";
 import { saveAs } from "file-saver";
 import { useLanguageContext } from "../../contexts/LanguageContext";
+import { ThemeContext } from "../../contexts/ThemeContext";
 import "./DownloadButton.scss";
 import PropTypes from "prop-types";
 
 function DownloadButton(props) {
+  const { theme } = useContext(ThemeContext);
   const { getString } = useLanguageContext();
   const { videoId, title } = props;
   const handleDownload = async () => {
@@ -21,7 +23,7 @@ function DownloadButton(props) {
   };
 
   return (
-    <button className="download-button" onClick={handleDownload}>
+    <button className={(theme, "download-button")} onClick={handleDownload}>
       {getString("download")}
     </button>
   );

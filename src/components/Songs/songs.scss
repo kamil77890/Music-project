@@ -1,3 +1,16 @@
+.light {
+  --background: #c2d8ff;
+  --text: #19212f;
+  --button-background: rgb(144, 182, 231);
+  --button-background-hover: #5d84bb;
+}
+.dark {
+  --background: rgb(68, 88, 117);
+  --text: #fff;
+  --button-background: rgb(108, 175, 190);
+  --button-background-hover: #526d91;
+}
+
 .songs {
   display: grid;
   place-items: center;
@@ -14,6 +27,7 @@
   margin-bottom: 200px;
 
   .song {
+    color: var(--text);
     display: flex;
     padding: 10px;
     height: 375px;
@@ -21,7 +35,7 @@
     @media screen and (max-width: 850px) {
       width: 80%;
     }
-    background-color: rgb(68, 88, 117);
+    background-color: var(--background);
     flex-direction: column;
     align-items: center;
     text-decoration: none;
@@ -29,8 +43,9 @@
     border-radius: 20px;
 
     .song__img__component {
+      color: #fff;
       position: relative;
-      
+
       .time {
         position: absolute;
         bottom: 0;
@@ -41,7 +56,7 @@
       .song__image {
         width: 320px;
         height: 240px;
-        
+
         border-radius: 10px;
       }
 
