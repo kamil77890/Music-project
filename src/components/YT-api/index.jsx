@@ -4,7 +4,6 @@ import SearchInput from "../SearchInput";
 import DetailedData from "./DetailedData";
 import { useLanguageContext } from "../../contexts/LanguageContext";
 import { useParams } from "react-router-dom";
-import ThemeSwitch from "../ThemeSwitch";
 import "./search.scss";
 
 const YouTubeSongs = () => {
@@ -37,7 +36,6 @@ const YouTubeSongs = () => {
     <>
       <header className="nav">
         <div>
-          <ThemeSwitch />
           <img className="favicon" src="favicon.svg" alt="Logo" />
           <h2 className="title">{getString("header")}</h2>
         </div>
