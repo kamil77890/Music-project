@@ -1,3 +1,5 @@
+import axios from "axios";
+
 export const getDuration = (song) => {
   const duration = song.contentDetails.duration;
   const re = /PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/;
@@ -9,8 +11,18 @@ export const getDuration = (song) => {
     return {
       minutes: totalMinutes.toString(),
       seconds: seconds,
-  };
+    };
   } else {
     return { minutes: undefined, seconds: undefined };
   }
+};
+
+export const sendData = async (data) => {
+  console.log(data);
+  const response = await axios.post("http://localhost:5000/api/data", data, {
+    responseType: "blob",
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+    },
+  });
 };

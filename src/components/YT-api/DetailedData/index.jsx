@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Songs from "../../Songs";
-import PropTypes from "prop-types"
+import PropTypes from "prop-types";
 
 const DetailedData = (props) => {
   const { songs } = props;
@@ -10,6 +10,7 @@ const DetailedData = (props) => {
 
   useEffect(() => {
     const songIds = songs.map((song) => song.id.videoId).join(",");
+    console.log(songIds);
     if (songIds.length > 0) {
       const fetchData = async () => {
         const response = await axios.get(
@@ -34,5 +35,5 @@ const DetailedData = (props) => {
 export default DetailedData;
 
 DetailedData.propTypes = {
-  songs: PropTypes.array.isRequired
+  songs: PropTypes.array.isRequired,
 };

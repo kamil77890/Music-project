@@ -1,0 +1,67 @@
+.popup {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  display: flex;
+  align-items: right;
+  justify-items: right;
+  z-index: 999;
+  background-color: rgb(67, 128, 128);
+  padding: 10px 25px;
+  border-radius: 5px;
+  animation-name: animation;
+  animation-duration: 6s;
+}
+.popup:hover {
+  animation: colorChange 0.6s forwards, shadowChange 0.6s forwards;
+}
+
+@keyframes colorChange {
+  0% {
+    background-color: rgb(67, 128, 128);
+  }
+  33% {
+    background-color: rgb(40, 183, 183);
+  }
+  66% {
+    background-color: rgb(3, 162, 162);
+  }
+  100% {
+    background-color: rgb(3, 162, 162);
+  }
+}
+
+@keyframes shadowChange {
+  0% {
+    box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+  }
+  33% {
+    box-shadow: 1px 1px 1px rgb(67, 128, 128);
+  }
+  66% {
+    box-shadow: 1.5px 1.5px 1.5px rgb(40, 183, 183);
+  }
+  100% {
+    box-shadow: 2px 2px 2px rgb(3, 162, 162);
+  }
+}
+@keyframes animation {
+  0% {
+    transition: ease-in-out;
+  }
+  20% {
+    transform: scale(0.95);
+  }
+  40% {
+    transform: scale(0.92);
+  }
+  60% {
+    transform: scale(0.9);
+  }
+  80% {
+    transform: scale(0.86);
+  }
+  100% {
+    transform: scale(0.7);
+  }
+}

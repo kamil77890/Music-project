@@ -7,17 +7,16 @@ import PropTypes from "prop-types";
 
 function Songs(props) {
   const { songs } = props;
-  const song = useRef();
 
   const filteredSongs = songs
     .map((song) => ({ ...song, duration: getDuration(song) }))
-    .filter((song) => song.duration.minutes > 1 || song.duration.minutes < 8)
+    .filter((song) => song.duration.minutes > 1 && song.duration.minutes < 8)
     .filter((song) => !song.snippet.title.includes("#"));
 
   return (
     <main className="songs">
       {filteredSongs.map((song) => (
-        <div className="song" key={song.id} ref={song}>
+        <div className="song" key={song.id}>
           <div className="song__img__component">
             <img
               src={song.snippet.thumbnails.high.url}
@@ -36,7 +35,11 @@ function Songs(props) {
             <h3>{song.snippet.title.replace("&amp;", "&")}</h3>
           </span>
 
-          <DownloadButton videoId={song.id} title={song.snippet.title} />
+          <DownloadButton
+            songs={songs}
+            videoId={song.id}
+            title={song.snippet.title}
+          />
         </div>
       ))}
     </main>

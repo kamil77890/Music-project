@@ -23,7 +23,6 @@ const LanguageProvider = (props) => {
   }, []);
 
   const [lang, setLang] = useState("pl");
-  console.log(strings);
 
   // look in src/strings.json for avaliable parameters
   const getString = (text) => {
