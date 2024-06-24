@@ -51,13 +51,9 @@ def handle_data():
 
     new_data = request.json
     if True == True:
-        try:
-            with open(Jsonfile, 'r') as file:
-                data = json.load(file)
-        except json.JSONDecodeError:
-            data = []
-        except FileNotFoundError:
-            data = []
+
+        with open(Jsonfile, 'r') as file:
+            data = json.load(file)
 
         def validation():
             last_id = 0

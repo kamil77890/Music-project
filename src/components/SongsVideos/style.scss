@@ -7,6 +7,17 @@
   text-align: center;
   display: flex;
   flex-direction: column;
-
+  justify-content: space-around;
   width: 30vh;
+  
+  .video {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+    .songImg {
+      width: 50px;
+    }
+  }
 }

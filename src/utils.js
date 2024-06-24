@@ -26,3 +26,9 @@ export const sendData = async (data) => {
     },
   });
 };
+
+export const gettingSongs = async () => {
+  const responce = axios.get("/song/songs.json");
+
+  return responce.data;
+};

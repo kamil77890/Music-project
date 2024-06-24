@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
+import { FaPlay, FaPause } from "react-icons/fa";
 import axios from "axios";
 import "./style.scss";
 
 const SongsVideos = () => {
   const [songs, setSongs] = useState([]);
-  const [currentSong, setCurrentSong] = useState(null);
+  const [audio, setAudio] = useState(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [currentSongTitle, setCurrentSongTitle] = useState("");
 
   useEffect(() => {
     axios
@@ -18,14 +21,30 @@ const SongsVideos = () => {
   }, []);
 
   const playSong = (songTitle) => {
+    if (audio) {
+      audio.pause();
+    }
+    if (isPlaying && currentSongTitle === songTitle) {
+      setIsPlaying(false);
+      return;
+    }
+
     const songUrl = `http://localhost:5000/songs/${encodeURIComponent(
       songTitle
     )}.mp3`;
-    const audioPlayer = document.getElementById("audio-player");
 
-    audioPlayer.src = songUrl;
-    audioPlayer.play();
-    setCurrentSong(songTitle);
+    const newAudio = new Audio(songUrl);
+    setAudio(newAudio);
+    setCurrentSongTitle(songTitle);
+
+    newAudio.play().then(() => {
+      setIsPlaying(true);
+    });
+
+    newAudio.onended = () => {
+      audio.play();
+      setIsPlaying(true);
+    };
   };
 
   return (
@@ -39,16 +58,21 @@ const SongsVideos = () => {
           ([id, songArray]) =>
             Array.isArray(songArray) &&
             songArray.map((song, index) => (
-              <div key={index}>
-                <button onClick={() => playSong(song.title)}>
-                  {song.title}
-                </button>
+              <div
+                key={index}
+                className="video"
+                onClick={() => playSong(song.title)}
+              >
+                {isPlaying && currentSongTitle === song.title ? (
+                  <FaPause />
+                ) : (
+                  <FaPlay />
+                )}
+                <img src={song.src} alt="img" className="songImg" />
+                <h5>{song.title}</h5>
               </div>
             ))
         )}
-        <audio controls id="audio-player">
-          Your browser does not support the audio element.
-        </audio>
       </div>
       <div>footer</div>
     </aside>

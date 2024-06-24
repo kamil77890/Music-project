@@ -1,23 +1,12 @@
 [
+  [
+    1,
     [
-        1,
-        [
-            {
-                "title": "Rosa Linn - SNAP (Lyrics)",
-                "videoId": "16t7634"
-            }
-        ]
-    ],
-    [
-        1,
-        {
-            "title": "Marshmello - Silence (Lyrics) ft. Khalid",
-            "src": "https://i.ytimg.com/vi/4oXgCJf4hf8/hqdefault.jpg",
-            "videoId": "4oXgCJf4hf8",
-            "duration": {
-                "minutes": "3",
-                "seconds": "1"
-            }
-        }
+      {
+        "title": "Rosa Linn - SNAP (Lyrics)",
+        "videoId": "16t7634",
+        "src": "https://i.ytimg.com/vi/4oXgCJf4hf8/hqdefault.jpg"
+      }
     ]
+  ]
 ]
