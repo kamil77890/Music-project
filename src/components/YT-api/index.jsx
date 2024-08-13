@@ -5,6 +5,7 @@ import DetailedData from "./DetailedData";
 import { useLanguageContext } from "../../contexts/LanguageContext";
 import { useParams } from "react-router-dom";
 import "./search.scss";
+import SongsVideos from "../SongsVideos/SongsVideos";
 
 const YouTubeSongs = () => {
   const { getString } = useLanguageContext();
@@ -34,6 +35,7 @@ const YouTubeSongs = () => {
 
   return (
     <>
+      <SongsVideos />
       <header className="nav">
         <div>
           <img className="favicon" src="favicon.svg" alt="Logo" />
@@ -46,7 +48,6 @@ const YouTubeSongs = () => {
           onFormSubmit={handleSubmit}
         />
       </header>
-
       <DetailedData songs={songs} />
     </>
   );

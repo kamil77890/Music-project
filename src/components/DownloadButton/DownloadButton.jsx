@@ -12,30 +12,37 @@ function DownloadButton(props) {
   const { theme } = useContext(ThemeContext);
   const { getString } = useLanguageContext();
   const { videoId, title, songs } = props;
-  const [download, setDowloand] = useState(false);
+  const [download, setDownload] = useState(false);
 
   const handleDownload = async () => {
-    setDowloand(true);
-    const response = await axios.get(
-      `http://127.0.0.1:5000/mp3?id=${videoId}`,
-      {
-        responseType: "blob",
-        headers: { "Access-Control-Allow-Origin": "*" },
-      }
-    );
+    setDownload(true);
+    try {
+      const response = await axios.get(
+        `http://127.0.0.1:5000/mp3?id=${videoId}`,
+        {
+          responseType: "blob",
+          headers: {
+            // CORS headers are not needed on the client-side
+            // They should be configured on the server-side
+          },
+        }
+      );
 
-    saveAs(response.data, `${title}.mp3`);
-    sendSongData();
+      saveAs(response.data, `${title}.mp3`);
+      sendSongData();
+    } catch (error) {
+      console.error("Error during download:", error.message);
+    } finally {
+      setDownload(false);
+    }
   };
-
-  const song = songs.filter((song) => {
-    return song.id === videoId;
-  });
 
   const sendSongData = () => {
     const song = songs.find((song) => song.id === videoId);
     if (song) {
       sendData({
+        id: 0,
+        liked: false,
         title: song.snippet.title,
         src: song.snippet.thumbnails.high.url,
         videoId: videoId,
@@ -46,15 +53,16 @@ function DownloadButton(props) {
 
   useEffect(() => {
     if (download) {
-      setTimeout(() => {
-        setDowloand(false);
+      const timer = setTimeout(() => {
+        setDownload(false);
       }, 5000);
+      return () => clearTimeout(timer); // Cleanup timer
     }
   }, [download]);
 
   return (
     <div>
-      <button className={(theme, "download-button")} onClick={handleDownload}>
+      <button className={`download-button ${theme}`} onClick={handleDownload}>
         {getString("download")}
       </button>
       {download ? <PopupC /> : null}
@@ -62,9 +70,22 @@ function DownloadButton(props) {
   );
 }
 
-export default DownloadButton;
-
 DownloadButton.propTypes = {
   videoId: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
+  songs: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      snippet: PropTypes.shape({
+        title: PropTypes.string.isRequired,
+        thumbnails: PropTypes.shape({
+          high: PropTypes.shape({
+            url: PropTypes.string.isRequired,
+          }).isRequired,
+        }).isRequired,
+      }).isRequired,
+    }).isRequired
+  ).isRequired,
 };
+
+export default DownloadButton;

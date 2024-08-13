@@ -17,18 +17,33 @@ export const getDuration = (song) => {
   }
 };
 
-export const sendData = async (data) => {
-  console.log(data);
-  const response = await axios.post("http://localhost:5000/api/data", data, {
-    responseType: "blob",
-    headers: {
-      "Access-Control-Allow-Origin": "*",
+const transformData = (data) => {
+  return {
+    [data.id]: {
+      liked: data.liked,
+      title: data.title,
+      src: data.src,
+      videoId: data.videoId,
+      duration: data.duration,
     },
-  });
+  };
+};
+
+export const sendData = async (data) => {
+  const transformedData = transformData(data);
+  const response = await axios.post(
+    "http://localhost:5000/api/data",
+    transformedData,
+    {
+      responseType: "blob",
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+      },
+    }
+  );
 };
 
 export const gettingSongs = async () => {
   const responce = axios.get("/song/songs.json");
-
   return responce.data;
 };
