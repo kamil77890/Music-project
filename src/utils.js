@@ -31,19 +31,26 @@ const transformData = (data) => {
 
 export const sendData = async (data) => {
   const transformedData = transformData(data);
-  const response = await axios.post(
-    "http://localhost:5000/api/data",
-    transformedData,
-    {
-      responseType: "blob",
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-      },
-    }
-  );
+  try {
+    const response = await axios.post(
+      "http://localhost:5000/api/data",
+      transformedData,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+        },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error sending data:", error);
+    throw error;
+  }
 };
 
 export const gettingSongs = async () => {
   const responce = axios.get("/song/songs.json");
+  console.log(responce);
   return responce.data;
 };

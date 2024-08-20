@@ -1,9 +1,9 @@
 import os
 from flask import Flask, request, send_file, send_from_directory, jsonify
 from flask_cors import CORS
-from pytube import YouTube
 import json
 from time import sleep
+from yt_dlp import YoutubeDL
 
 DOWNLOAD_DIR = os.getcwd()
 
@@ -18,19 +18,28 @@ Jsonfile = os.path.join(filepath, 'songs.json')
 @app.route('/mp3', methods=['GET'])
 def get_mp3():
     video_id = request.args.get('id')
+    url = f"https://www.youtube.com/watch?v={video_id}"
 
     try:
-        yt = YouTube('https://www.youtube.com/watch?v=WxtseR03lzY')
-        stream = yt.streams.filter(only_audio=True).first()
+        ydl_opts = {
+            'format': 'bestaudio/best',
+            'outtmpl': os.path.join(filepath, '%(title)s.%(ext)s'),
+            'postprocessors': [{
+                'key': 'FFmpegExtractAudio',
+                'preferredcodec': 'mp3',
+                'preferredquality': '192',
+            }],
+            'ffmpeg_location': r'C:\ffmpeg\bin',
+        }
 
-        if not stream:
-            return jsonify({'error': 'No audio stream found'}), 404
+        with YoutubeDL(ydl_opts) as ydl:
+            info = ydl.extract_info(url, download=True)
+            title = ydl.prepare_filename(info).replace(
+                '.webm', '').replace('.mp4', '').replace(filepath+'/', '')
+            mp3_file = f"{title}.mp3"
+        sleep(5)
 
-        title = f"ja"
-        stream.download(output_path=filepath, filename=f"{title}.mp3")
-        sleep(10)
-
-        return send_file(os.path.join(filepath, f'{title}.mp3'), as_attachment=True)
+        return send_file(os.path.join(filepath, mp3_file), as_attachment=True)
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500
@@ -48,18 +57,24 @@ def handle_data():
     with open(Jsonfile, 'r') as file:
         data = json.load(file)
 
-    new_video_id = new_data.get("videoId")
-    existing_entry = next(
-        (entry for entry in data if entry["videoId"] == new_video_id), None
-    )
+        data_IDS = [list(item.keys())[0] for item in data]
+        print(data_IDS)
+        for id in new_data:
+            new_id = id
+            print("NEW_ID:" + new_id)
 
-    if not existing_entry:
-        new_id = max([entry["id"] for entry in data], default=0) + 1
-        new_data["id"] = new_id
-        data.append(new_data)
+            for i in range(1, len(data_IDS) + 1):
+                if new_id != [id for id in data_IDS]:
+                    print("new_id " + new_id, " old " + id)
+                    data.append(new_data)
 
-        with open(Jsonfile, 'w') as file:
-            json.dump(data, file, indent=4)
+                    with open(Jsonfile, 'w') as file:
+                        json.dump(data, file, indent=4)
+
+                elif new_id == [id for id in data_IDS]:
+                    print("nieprawidłowy format")
+                else:
+                    print("Are u stupid :) !")
 
     return jsonify(new_data)
 

@@ -14,7 +14,14 @@ const SongsVideos = () => {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    const intervalId = setInterval(gettingSongs, 5000);
+    const fetchSongs = async () => {
+      const songsData = await gettingSongs(); // gettingSongs() is a function that fetches data from the server
+      setSongs(songsData);
+      console.log(songs);
+    };
+
+    fetchSongs();
+    const intervalId = setInterval(fetchSongs, 5000);
     return () => clearInterval(intervalId);
   }, []);
 
@@ -71,13 +78,13 @@ const SongsVideos = () => {
                 className="video"
                 onClick={() => playSong(song.videoId, song.title)}
               >
-                <div onClick={() => toggleLike(song.id)}>
+                {/* <div onClick={() => toggleLike(song.id)}>
                   {song.liked ? (
                     <TiHeart size={24} />
                   ) : (
                     <TiHeartOutline size={24} />
                   )}
-                </div>
+                </div> serduszka :) */}
                 <img src={song.src} alt="img" className="songImg" />
                 <h5>{song.title}</h5>
               </div>

@@ -19,15 +19,10 @@ function DownloadButton(props) {
     try {
       const response = await axios.get(
         `http://127.0.0.1:5000/mp3?id=${videoId}`,
-        {
-          responseType: "blob",
-          headers: {
-            // CORS headers are not needed on the client-side
-            // They should be configured on the server-side
-          },
-        }
+        { responseType: "blob" } // Dodaj tę opcję
       );
 
+      // Użyj FileSaver.js do zapisania pliku
       saveAs(response.data, `${title}.mp3`);
       sendSongData();
     } catch (error) {
@@ -37,17 +32,23 @@ function DownloadButton(props) {
     }
   };
 
-  const sendSongData = () => {
+  const sendSongData = async () => {
     const song = songs.find((song) => song.id === videoId);
+    console.log("Song:", song);
     if (song) {
-      sendData({
-        id: 0,
-        liked: false,
-        title: song.snippet.title,
-        src: song.snippet.thumbnails.high.url,
-        videoId: videoId,
-        duration: getDuration(song),
-      });
+      try {
+        const response = await sendData({
+          id: 0,
+          liked: false,
+          title: song.snippet.title,
+          src: song.snippet.thumbnails.high.url,
+          videoId: videoId,
+          duration: getDuration(song),
+        });
+        console.log("Response:", response);
+      } catch (error) {
+        console.error("Error sending song data:", error);
+      }
     }
   };
 
