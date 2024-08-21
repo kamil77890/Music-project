@@ -3,7 +3,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { saveAs } from "file-saver";
 import { useLanguageContext } from "../../contexts/LanguageContext";
 import { ThemeContext } from "../../contexts/ThemeContext";
-import { sendData, getDuration } from "../../utils";
+import { sendData, getDuration, gettingSongsIds } from "../../utils";
 import "./DownloadButton.scss";
 import PropTypes from "prop-types";
 import PopupC from "../Popup";
@@ -13,18 +13,20 @@ function DownloadButton(props) {
   const { getString } = useLanguageContext();
   const { videoId, title, songs } = props;
   const [download, setDownload] = useState(false);
+  const [lastId, setLastId] = useState(null);
 
   const handleDownload = async () => {
     setDownload(true);
     try {
       const response = await axios.get(
         `http://127.0.0.1:5000/mp3?id=${videoId}`,
-        { responseType: "blob" } // Dodaj tę opcję
+        { responseType: "blob" }
       );
 
-      // Użyj FileSaver.js do zapisania pliku
       saveAs(response.data, `${title}.mp3`);
-      sendSongData();
+      const newId = await gettingSongsIds();
+      setLastId(newId);
+      await sendSongData(newId); // Pass newId as argument
     } catch (error) {
       console.error("Error during download:", error.message);
     } finally {
@@ -32,13 +34,13 @@ function DownloadButton(props) {
     }
   };
 
-  const sendSongData = async () => {
+  const sendSongData = async (newId) => {
     const song = songs.find((song) => song.id === videoId);
     console.log("Song:", song);
     if (song) {
       try {
         const response = await sendData({
-          id: 0,
+          id: newId,
           liked: false,
           title: song.snippet.title,
           src: song.snippet.thumbnails.high.url,

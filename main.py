@@ -23,7 +23,7 @@ def get_mp3():
     try:
         ydl_opts = {
             'format': 'bestaudio/best',
-            'outtmpl': os.path.join(filepath, '%(title)s.%(ext)s'),
+            'outtmpl': os.path.join(filepath, f'{video_id}.%(ext)s'),
             'postprocessors': [{
                 'key': 'FFmpegExtractAudio',
                 'preferredcodec': 'mp3',
@@ -34,10 +34,10 @@ def get_mp3():
 
         with YoutubeDL(ydl_opts) as ydl:
             info = ydl.extract_info(url, download=True)
-            title = ydl.prepare_filename(info).replace(
-                '.webm', '').replace('.mp4', '').replace(filepath+'/', '')
-            mp3_file = f"{title}.mp3"
-        sleep(5)
+
+            mp3_file = f"{video_id}.mp3"
+
+        sleep(3.5)
 
         return send_file(os.path.join(filepath, mp3_file), as_attachment=True)
 
@@ -58,21 +58,21 @@ def handle_data():
         data = json.load(file)
 
         data_IDS = [list(item.keys())[0] for item in data]
-        print(data_IDS)
+
         for id in new_data:
             new_id = id
-            print("NEW_ID:" + new_id)
 
-            for i in range(1, len(data_IDS) + 1):
-                if new_id != [id for id in data_IDS]:
-                    print("new_id " + new_id, " old " + id)
+            for i in range(0, len(data_IDS)):
+                if int(new_id) != int([ids for ids in data_IDS][i]):
+                    print("takie same!")
+
                     data.append(new_data)
 
                     with open(Jsonfile, 'w') as file:
                         json.dump(data, file, indent=4)
 
-                elif new_id == [id for id in data_IDS]:
-                    print("nieprawidłowy format")
+                elif int(new_id) == int([id for id in data_IDS][i]):
+                    print("Takie same ip")
                 else:
                     print("Are u stupid :) !")
 
@@ -89,8 +89,9 @@ def like_song():
         data = json.load(file)
 
     for entry in data:
-        if entry['id'] == video_id:
-            entry['liked'] = liked
+        key = list(entry.keys())[0]
+        if key == video_id:
+            entry[key]['liked'] = liked
             break
 
     with open(Jsonfile, 'w') as file:

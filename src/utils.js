@@ -49,8 +49,19 @@ export const sendData = async (data) => {
   }
 };
 
-export const gettingSongs = async () => {
-  const responce = axios.get("/song/songs.json");
-  console.log(responce);
-  return responce.data;
+export const gettingSongsIds = async () => {
+  const response = await axios.get("/songs/songs.json");
+  const data = response.data;
+
+  const ids = data.map((item) => {
+    const key = Object.keys(item)[0];
+    return parseInt(key, 10);
+  });
+
+  const maxId = Math.max(...ids, 0);
+  const newId = maxId + 1;
+
+  console.log("New ID:", newId);
+
+  return newId;
 };

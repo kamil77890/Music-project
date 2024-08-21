@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { FaPlay, FaPause } from "react-icons/fa";
 import { BiSolidVideos } from "react-icons/bi";
 import { TiHeart, TiHeartOutline } from "react-icons/ti";
-import { gettingSongs } from "../../utils";
 import axios from "axios";
 import "./style.scss";
 
@@ -10,38 +8,41 @@ const SongsVideos = () => {
   const [songs, setSongs] = useState([]);
   const [audio, setAudio] = useState(null);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [currentSongTitle, setCurrentSongTitle] = useState("");
+  const [currentVideoId, setCurrentVideoId] = useState("");
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     const fetchSongs = async () => {
-      const songsData = await gettingSongs(); // gettingSongs() is a function that fetches data from the server
-      setSongs(songsData);
-      console.log(songs);
+      try {
+        const response = await axios.get("/songs/songs.json");
+        setSongs(response.data); // Set the fetched songs data
+      } catch (error) {
+        console.error("Error fetching songs:", error);
+      }
     };
 
     fetchSongs();
+
     const intervalId = setInterval(fetchSongs, 5000);
     return () => clearInterval(intervalId);
   }, []);
 
-  const playSong = (songId, songTitle) => {
-    const SONGID = `t${songId}`;
+  const playSong = (videoId) => {
     if (audio) {
       audio.pause();
     }
-    if (isPlaying && currentSongTitle === songTitle) {
+    if (isPlaying && currentVideoId === videoId) {
       setIsPlaying(false);
       return;
     }
 
     const songUrl = `http://127.0.0.1:5000/songs/${encodeURIComponent(
-      SONGID
+      videoId
     )}.mp3`;
 
     const newAudio = new Audio(songUrl);
     setAudio(newAudio);
-    setCurrentSongTitle(songTitle);
+    setCurrentVideoId(videoId);
 
     newAudio.play().then(() => {
       setIsPlaying(true);
@@ -52,18 +53,40 @@ const SongsVideos = () => {
     };
   };
 
-  const toggleLike = (songId) => {
-    const updatedSongs = songs.map((song) =>
-      song.id === songId ? { ...song, liked: !song.liked } : song
-    );
+  const toggleLike = async (videoId) => {
+    const updatedSongs = songs.map((song) => {
+      const key = Object.keys(song)[0]; // Get the key (index) of the song
+      if (song[key].videoId === videoId) {
+        return {
+          [key]: {
+            ...song[key],
+            liked: !song[key].liked,
+          },
+        };
+      }
+      return song;
+    });
     setSongs(updatedSongs);
 
-    axios.post("http://127.0.0.1:5000/api/like", {
-      id: songId,
-      liked: updatedSongs.find((song) => song.id === songId).liked || false,
-    });
+    try {
+      await axios.post("http://127.0.0.1:5000/api/like", {
+        id: videoId,
+        liked:
+          updatedSongs.find(
+            (song) => song[Object.keys(song)[0]].videoId === videoId
+          )[
+            Object.keys(
+              updatedSongs.find(
+                (song) => song[Object.keys(song)[0]].videoId === videoId
+              )
+            )
+          ].liked || false,
+      });
+    } catch (error) {
+      console.error("Error updating like status:", error);
+    }
   };
-  // const songList = ()
+
   return (
     <div>
       {isVisible ? (
@@ -72,23 +95,32 @@ const SongsVideos = () => {
             <h1>Music Player</h1>
           </div>
           <div>
-            {songs.map((song) => (
-              <div
-                key={song.id}
-                className="video"
-                onClick={() => playSong(song.videoId, song.title)}
-              >
-                {/* <div onClick={() => toggleLike(song.id)}>
-                  {song.liked ? (
-                    <TiHeart size={24} />
-                  ) : (
-                    <TiHeartOutline size={24} />
-                  )}
-                </div> serduszka :) */}
-                <img src={song.src} alt="img" className="songImg" />
-                <h5>{song.title}</h5>
-              </div>
-            ))}
+            {songs.map((song, index) => {
+              const key = Object.keys(song)[0]; 
+              const songData = song[key];
+              return (
+                <div
+                  key={index}
+                  className="video"
+                  onClick={() => playSong(songData.videoId)} 
+                >
+                  <div
+                    onClick={(e) => {
+                      e.stopPropagation(); 
+                      toggleLike(songData.videoId);
+                    }}
+                  >
+                    {songData.liked ? (
+                      <TiHeart size={24} />
+                    ) : (
+                      <TiHeartOutline size={24} />
+                    )}
+                  </div>
+                  <img src={songData.src} alt="img" className="songImg" />
+                  <h5>{songData.title}</h5>
+                </div>
+              );
+            })}
           </div>
           <div>footer</div>
         </aside>
