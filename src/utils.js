@@ -35,6 +35,7 @@ export const sendData = async (data) => {
   try {
     const response = await axios.post(
       "https://server-weld-one.vercel.app/api/data",
+
       transformedData,
       {
         headers: {
