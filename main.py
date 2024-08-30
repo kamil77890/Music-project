@@ -15,6 +15,11 @@ filepath = os.path.join(DOWNLOAD_DIR, 'public', 'songs')
 Jsonfile = os.path.join(filepath, 'songs.json')
 
 
+@app.route('/', methods=['GET'])
+def home():
+    return "Lubie koty!"
+
+
 @app.route('/mp3', methods=['GET'])
 def get_mp3():
     video_id = request.args.get('id')
