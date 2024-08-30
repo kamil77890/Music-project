@@ -19,7 +19,7 @@ function DownloadButton(props) {
     setDownload(true);
     try {
       const response = await axios.get(
-        `http://127.0.0.1:5000/mp3?id=${videoId}`,
+        `server-weld-one.vercel.app/mp3?id=${videoId}`,
         { responseType: "blob" }
       );
 
