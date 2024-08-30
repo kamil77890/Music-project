@@ -33,7 +33,7 @@ export const sendData = async (data) => {
   const transformedData = transformData(data);
   try {
     const response = await axios.post(
-      "http://localhost:5000/api/data",
+      "server-weld-one.vercel.app/api/data",
       transformedData,
       {
         headers: {
