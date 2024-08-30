@@ -17,13 +17,16 @@ Jsonfile = os.path.join(filepath, 'songs.json')
 
 @app.route('/mp3', methods=['GET'])
 def get_mp3():
-    video_id = request.args.get('id')
-    url = f"https://www.youtube.com/watch?v={video_id}"
+    videoId = request.args.get('videoId')
+    id = request.args.get('id')
+
+    url = f"https://www.youtube.com/watch?v={videoId}"
+    output_file = os.path.join(filepath, f'{id}.mp3')
 
     try:
         ydl_opts = {
             'format': 'bestaudio/best',
-            'outtmpl': os.path.join(filepath, f'{video_id}.%(ext)s'),
+            'outtmpl': os.path.join(filepath, f'{id}.%(ext)s'),
             'postprocessors': [{
                 'key': 'FFmpegExtractAudio',
                 'preferredcodec': 'mp3',
@@ -33,15 +36,17 @@ def get_mp3():
         }
 
         with YoutubeDL(ydl_opts) as ydl:
-            info = ydl.extract_info(url, download=True)
+            ydl.download([url])
 
-            mp3_file = f"{video_id}.mp3"
+        sleep(3)
 
-        sleep(3.5)
-
-        return send_file(os.path.join(filepath, mp3_file), as_attachment=True)
+        if os.path.exists(output_file):
+            return send_file(output_file, as_attachment=True)
+        else:
+            return jsonify({'error': 'File not found'}), 404
 
     except Exception as e:
+        print(f"Error: {e}")
         return jsonify({'error': str(e)}), 500
 
 
@@ -57,24 +62,10 @@ def handle_data():
     with open(Jsonfile, 'r') as file:
         data = json.load(file)
 
-        data_IDS = [list(item.keys())[0] for item in data]
+        data.append(new_data)
 
-        for id in new_data:
-            new_id = id
-
-            for i in range(0, len(data_IDS)):
-                if int(new_id) != int([ids for ids in data_IDS][i]):
-                    print("takie same!")
-
-                    data.append(new_data)
-
-                    with open(Jsonfile, 'w') as file:
-                        json.dump(data, file, indent=4)
-
-                elif int(new_id) == int([id for id in data_IDS][i]):
-                    print("Takie same ip")
-                else:
-                    print("Are u stupid :) !")
+        with open(Jsonfile, 'w') as file:
+            json.dump(data, file, indent=4)
 
     return jsonify(new_data)
 
@@ -90,7 +81,7 @@ def like_song():
 
     for entry in data:
         key = list(entry.keys())[0]
-        if key == video_id:
+        if entry[key]['videoId'] == video_id:
             entry[key]['liked'] = liked
             break
 

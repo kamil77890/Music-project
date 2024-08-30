@@ -18,17 +18,22 @@ function DownloadButton(props) {
   const handleDownload = async () => {
     setDownload(true);
     try {
+      const newId = await gettingSongsIds();
+      setLastId(newId);
+
       const response = await axios.get(
-        `http://127.0.0.1:5000/mp3?id=${videoId}`,
-        { responseType: "blob" }
+        `https://server-weld-one.vercel.app/mp3?videoId=${videoId}&id=${newId}`,
+        {
+          responseType: "blob",
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+          },
+        }
       );
 
       saveAs(response.data, `${title}.mp3`);
-      const newId = await gettingSongsIds();
-      setLastId(newId);
-      await sendSongData(newId); // Pass newId as argument
-    } catch (error) {
-      console.error("Error during download:", error.message);
+
+      await sendSongData(newId);
     } finally {
       setDownload(false);
     }
@@ -59,7 +64,7 @@ function DownloadButton(props) {
       const timer = setTimeout(() => {
         setDownload(false);
       }, 5000);
-      return () => clearTimeout(timer); // Cleanup timer
+      return () => clearTimeout(timer);
     }
   }, [download]);
 

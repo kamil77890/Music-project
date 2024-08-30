@@ -1,0 +1,108 @@
+// DownloadedSongs.scss
+
+/* Container for the entire component */
+.downloaded-songs {
+  padding: 20px;
+}
+
+/* Back button styles */
+.back {
+  position: fixed;
+  left: 0;
+  top: 0;
+  padding: 10px;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+
+  a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #333;
+    text-decoration: none;
+  }
+
+  &:hover {
+    background: #f0f0f0;
+  }
+}
+
+/* Header styling */
+.header {
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  font-size: 2rem;
+  color: #000000;
+}
+
+/* Song list container */
+.song-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Individual song item styling */
+.song-item {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  background: #000000;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: background 0.3s;
+
+  &:hover {
+    background: #eaeaea;
+  }
+}
+
+/* Like button styling */
+.like-button {
+  margin-right: 15px;
+  display: flex;
+  align-items: center;
+  color: #e74c3c;
+  cursor: pointer;
+
+  &:hover {
+    color: #c0392b;
+  }
+}
+
+/* Song image styling */
+.song-image {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-right: 15px;
+}
+
+/* Song title styling */
+.song-title {
+  font-size: 1rem;
+  color: #333;
+  margin: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .song-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .song-image {
+    margin-bottom: 10px;
+  }
+
+  .song-title {
+    font-size: 0.9rem;
+  }
+}

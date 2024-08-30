@@ -1,31 +1,91 @@
-.videos {
-  position: fixed;
-  border-right: 1px solid #fff;
-  left: 0;
-  top: 0;
-  gap: 5px;
-  padding: 10px;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  width: 30vh;
-
-  .video {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 25vh;
-    gap: 10px;
-
-    .songImg {
-      width: 50px;
-    }
-  }
-}
 .visibleImage {
   position: fixed;
   left: 0;
   top: 0;
-  padding: 30px;
+  width: 30px;
+  height: 100vh;
+  background-color: rgba(29, 61, 157, 0.2);
+  transition: width 0.3s ease;
+  a{
+    color: white;
+  }
+
+  &.expanded {
+    width: 300px;
+  }
+
+  .turnOn,
+  .turnOff {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    align-items: center;
+    height: 100vh;
+
+    button.On {
+      background-color: transparent;
+      transition: transform 0.2s ease;
+    }
+
+    button.On:hover {
+      transform: scale(1.2);
+    }
+
+    button.Off {
+      background-color: transparent;
+      transition: transform 0.2s ease;
+    }
+
+    button.Off:hover {
+      transform: scale(1.2);
+    }
+  }
+
+  .turnOff {
+    justify-content: flex-end;
+    padding-right: 5px;
+    position: absolute;
+    right: 0;
+    bottom: 50%; 
+    transform: translateY(50%); 
+  }
+
+  .section0 {
+    padding: 20px;
+    color: white;
+
+    h1 {
+      margin-bottom: 20px;
+    }
+
+    .selection {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+
+      div {
+        padding: 10px;
+        background-color: rgba(255, 255, 255, 0.1);
+        border-radius: 5px;
+        text-align: center;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+
+        &:hover {
+          background-color: rgba(255, 255, 255, 0.2);
+        }
+      }
+    }
+
+    footer {
+      position: absolute;
+      left: 0;
+      bottom: 5px;
+      width: 100%;
+      align-items: center;
+      font-size: 14px;
+      padding-right: 5px;
+      color: #ccc;
+    }
+  }
 }

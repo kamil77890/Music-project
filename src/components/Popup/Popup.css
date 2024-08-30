@@ -9,8 +9,6 @@
   background-color: rgb(67, 128, 128);
   padding: 10px 25px;
   border-radius: 5px;
-  animation-name: animation;
-  animation-duration: 6s;
 }
 .popup:hover {
   animation: colorChange 0.6s forwards, shadowChange 0.6s forwards;
@@ -43,25 +41,5 @@
   }
   100% {
     box-shadow: 2px 2px 2px rgb(3, 162, 162);
-  }
-}
-@keyframes animation {
-  0% {
-    transition: ease-in-out;
-  }
-  20% {
-    transform: scale(0.95);
-  }
-  40% {
-    transform: scale(0.92);
-  }
-  60% {
-    transform: scale(0.9);
-  }
-  80% {
-    transform: scale(0.86);
-  }
-  100% {
-    transform: scale(0.7);
   }
 }

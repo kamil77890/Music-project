@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import "./Popup.css";
 
 function Popup() {
-  const [time, setTime] = useState(5);
+  const [time, setTime] = useState(6);
   useEffect(() => {
     setTimeout(() => {
       setTime((prevTime) => prevTime - 1);
