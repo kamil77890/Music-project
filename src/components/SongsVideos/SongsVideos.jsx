@@ -36,7 +36,7 @@ const SongsVideos = () => {
       return;
     }
 
-    const songUrl = `http://127.0.0.1:5000/songs/${encodeURIComponent(
+    const songUrl = `server-weld-one.vercel.app/songs/${encodeURIComponent(
       videoId
     )}.mp3`;
 
@@ -69,7 +69,7 @@ const SongsVideos = () => {
     setSongs(updatedSongs);
 
     try {
-      await axios.post("http://127.0.0.1:5000/api/like", {
+      await axios.post("server-weld-one.vercel.app/api/like", {
         id: videoId,
         liked:
           updatedSongs.find(
