@@ -6,6 +6,7 @@ import { ThemeContext } from "./contexts/ThemeContext";
 import SongsVideos from "./components/SongsVideos/SongsVideos";
 import DownloadedSongs from "./components/DownloadedSongs";
 import FavoriteSongs from "./components/FavoriteSongs";
+import QueryHistory from "./components/QueryHistory";
 
 import "./App.scss";
 import Footer from "./components/Footer/Footer";
@@ -22,6 +23,9 @@ function App() {
         <Route path="/songs" element={<SongsVideos />} />
         <Route path="/downloaded-songs" element={<DownloadedSongs />} />
         <Route path="/favorite-songs" element={<FavoriteSongs />} />
+        <Route path="/favorite-songs" element={<FavoriteSongs />} />
+        <Route path="/query-history" element={<QueryHistory />} />
+
         {/* <Route path="/songs/info" element={<Info />} />
         <Route path="/songs/about" element={<AboutUs />} /> */}
       </Routes>

@@ -23,6 +23,9 @@ const SongsVideos = () => {
               <Link to="/favorite-songs">
                 <div>Favorite songs</div>
               </Link>
+              <Link to="/query-history">
+                <div>Query history</div>
+              </Link>
               <Link to="/info">
                 <div>Info</div>
               </Link>

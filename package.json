@@ -22,15 +22,15 @@
     "jquery": "^3.7.1",
     "leaflet": "^1.9.4",
     "prop-types": "^15.8.1",
-    "react": "^18.2.0",
+    "react": "^19.0.0",
     "react-bootstrap": "^2.10.2",
-    "react-dom": "^18.2.0",
+    "react-dom": "^19.0.0",
     "react-icons": "^5.2.1",
     "react-leaflet": "^4.2.1",
     "react-player": "^2.15.1",
     "react-router-dom": "^6.23.1",
     "react-youtube": "^10.1.0",
-    "require": "^2.4.20",
+    "require": "^0.4.4",
     "sass": "^1.75.0"
   },
   "devDependencies": {

@@ -10,6 +10,7 @@ DOWNLOAD_DIR = os.getcwd()
 app = Flask(__name__)
 CORS(app)
 
+
 app.static_folder = 'public'
 filepath = os.path.join(DOWNLOAD_DIR, 'public', 'songs')
 Jsonfile = os.path.join(filepath, 'songs.json')

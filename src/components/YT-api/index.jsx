@@ -11,6 +11,7 @@ const YouTubeSongs = () => {
   const { getString } = useLanguageContext();
   const [songs, setSongs] = useState([]);
   const [query, setQuery] = useState("");
+
   const key = "AIzaSyAzy1Qf_lhA4snxKLL7FP6EmNGk7euZRIE";
   const { query: searchQuery } = useParams();
 
@@ -20,6 +21,11 @@ const YouTubeSongs = () => {
       fetchData();
     }
   }, [searchQuery]);
+
+  const setQueryAndFetchData = (query) => {
+    setQuery(query);
+    fetchData();
+  }
 
   const fetchData = async () => {
     const response = await axios.get(

@@ -12,6 +12,13 @@
   --input-frame-background: rgb(108, 175, 190);
   --input-frame-background-hover: #526d91;
 }
+.queryHistory {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+
+  background-color: #19212f;
+}
 
 .search-box {
   display: flex;

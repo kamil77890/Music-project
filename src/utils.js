@@ -34,7 +34,7 @@ export const sendData = async (data) => {
   const transformedData = transformData(data);
   try {
     const response = await axios.post(
-      "https://server-weld-one.vercel.app/api/data",
+      "http://localhost:5000/api/data",
 
       transformedData,
       {
@@ -81,7 +81,7 @@ export const toggleLike = async (videoId, songs, setSongs) => {
 
   setSongs(updatedSongs);
 
-  await axios.post("https://server-weld-one.vercel.app/api/like", {
+  await axios.post("http://localhost:5000/api/like", {
     id: videoId,
     liked:
       updatedSongs.find(
@@ -142,9 +142,7 @@ export const playSong = (
     return;
   }
 
-  const songUrl = `https://server-weld-one.vercel.app/${encodeURIComponent(
-    songId
-  )}.mp3`;
+  const songUrl = `http://localhost:5000/${encodeURIComponent(songId)}.mp3`;
 
   const newAudio = new Audio(songUrl);
   setAudio(newAudio);

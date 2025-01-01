@@ -9,23 +9,91 @@ const SearchInput = (props) => {
   const { theme } = useContext(ThemeContext);
   const { getString } = useLanguageContext();
   const { query, onInputChange, onFormSubmit } = props;
+
+  const [queryHistory, setQueryHistory] = useState([]);
+
+  useEffect(() => {
+    const storedHistory =
+      JSON.parse(localStorage.getItem("queryHistory")) || [];
+    setQueryHistory(storedHistory);
+  }, []);
+
+  const updateLocalStorage = (history) => {
+    localStorage.setItem("queryHistory", JSON.stringify(history));
+  };
+
+  const addToHistory = (newQuery) => {
+    if (newQuery && !queryHistory.includes(newQuery)) {
+      const updatedHistory = [newQuery, ...queryHistory];
+      setQueryHistory(updatedHistory);
+      updateLocalStorage(updatedHistory);
+    }
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (query.trim()) {
+      addToHistory(query);
+      onFormSubmit(e);
+    }
+  };
+
+  const handleChange = (querys) => {
+    onInputChange({ target: { value: querys } });
+  };
+
+  const showQueryHistory = () => {
+    if (queryHistory.length > 3) {
+      return queryHistory.slice(0, 3).map((query, index) => (
+        <div key={index} className="queryHistory">
+          <button
+            onClick={() => handleChange(query)}
+            className="historyElement"
+            key={index}
+          >
+            {query}
+          </button>
+        </div>
+      ));
+    }
+
+    return queryHistory.length > 0 ? (
+      <div className="queryHistory">
+        {queryHistory.map((query, index) => (
+          <button
+            onClick={() => handleChange(query)}
+            className="historyElement"
+            key={index}
+          >
+            {query}
+          </button>
+        ))}
+      </div>
+    ) : (
+      ""
+    );
+  };
+
   return (
-    <form
-      className={(theme === "light" ? "light" : "dark", "search-box")}
-      onSubmit={onFormSubmit}
-    >
-      <label>
-        <button>
-          <input
-            type="text"
-            placeholder={getString("search-box")}
-            value={query}
-            onChange={onInputChange}
-          />
-          <IoSearch />
-        </button>
-      </label>
-    </form>
+    <div>
+      <form
+        className={`${theme === "light" ? "light" : "dark"} search-box`}
+        onSubmit={handleSubmit}
+      >
+        <label>
+          <div className="showHistoryButton">
+            <input
+              type="text"
+              placeholder={getString("search-box")}
+              value={query}
+              onChange={onInputChange}
+            />
+            <IoSearch />
+          </div>
+        </label>
+      </form>
+      {showQueryHistory()}
+    </div>
   );
 };
 

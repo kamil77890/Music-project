@@ -20,9 +20,10 @@ function DownloadButton(props) {
     try {
       const newId = await gettingSongsIds();
       setLastId(newId);
+      console.log(newId, videoId);
 
       const response = await axios.get(
-        `https://server-weld-one.vercel.app/mp3?videoId=${videoId}&id=${newId}`,
+        `http://localhost:5000/mp3?videoId=${videoId}&id=${newId}`,
         {
           responseType: "blob",
           headers: {
