@@ -142,7 +142,9 @@ export const playSong = (
     return;
   }
 
-  const songUrl = `http://localhost:5000/${encodeURIComponent(songId)}.mp3`;
+  const songUrl = `http://localhost:5000/songs/${encodeURIComponent(
+    songId
+  )}.mp3`;
 
   const newAudio = new Audio(songUrl);
   setAudio(newAudio);

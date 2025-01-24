@@ -48,6 +48,7 @@ const YouTubeSongs = () => {
           <h2 className="title">{getString("header")}</h2>
         </div>
 
+
         <SearchInput
           query={query}
           onInputChange={(event) => setQuery(event.target.value)}

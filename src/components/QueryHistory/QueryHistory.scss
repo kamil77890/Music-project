@@ -1,36 +1,56 @@
-// QueryHistory.scss
-
 .queryStorage {
-  background-color: #f9f9f9;
-  padding: 20px;
+  background-color: #181818; /* Ciemne tło */
+  padding: 10px;
   border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
   width: 100%;
   max-width: 500px;
   margin: 0 auto;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease,
+    box-shadow 0.3s ease;
+
+  &:hover {
+    background-color: #565656; /* Jaśniejszy odcień przy hover */
+    transform: scale(1.05);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2); /* Subtelny efekt świetlny */
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &:active {
+    background-color: #444; /* Jeszcze ciemniejszy przy kliknięciu */
+  }
 
   h2 {
     font-size: 1.5rem;
-    color: #333;
+    color: #fff; /* Biały tekst */
     text-align: center;
     margin-bottom: 20px;
+    font-weight: 500;
   }
 
   .historyElement {
     display: inline-block;
-    background-color: #007bff;
-    color: white;
+    background-color: #181818; /* Ciemne tło */
+    color: #e5e5e5; /* Jasnoszary tekst */
     border: none;
+
     padding: 10px 15px;
     margin: 5px;
     border-radius: 5px;
+
     font-size: 1rem;
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    transition: background-color 0.3s ease, transform 0.2s ease,
+      box-shadow 0.3s ease;
 
     &:hover {
-      background-color: #0056b3;
+      background-color: #1f1f1f; /* Jaśniejszy odcień przy hover */
       transform: scale(1.05);
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.2); /* Subtelny efekt świetlny */
     }
 
     &:focus {
@@ -38,7 +58,33 @@
     }
 
     &:active {
-      background-color: #003c7d;
+      background-color: #444; /* Jeszcze ciemniejszy przy kliknięciu */
     }
+  }
+}
+
+/* Stylizacja dla wersji mobilnej */
+@media (max-width: 768px) {
+  .queryStorage {
+    padding: 15px;
+    max-width: 100%; /* Pełna szerokość dla urządzeń mobilnych */
+  }
+
+  .historyElement {
+    font-size: 0.9rem; /* Zmniejszenie rozmiaru czcionki na mobilnych */
+    padding: 8px 12px; /* Mniejsze przyciski */
+    margin: 5px;
+
+    width: 100%; /* Przyciski rozciągnięte na całą szerokość */
+    text-align: center; /* Wyśrodkowanie tekstu w przyciskach */
+  }
+
+  .historyElement:not(:last-child) {
+    margin-bottom: 10px; /* Większy odstęp między przyciskami */
+  }
+
+  h2 {
+    font-size: 1.25rem; /* Zmniejszenie czcionki nagłówka */
+    margin-bottom: 15px; /* Mniejszy margines dolny */
   }
 }
