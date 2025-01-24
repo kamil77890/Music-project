@@ -31,6 +31,7 @@
     "react-router-dom": "^6.23.1",
     "react-youtube": "^10.1.0",
     "require": "^0.4.4",
+    "rollup": "^4.32.0",
     "sass": "^1.75.0"
   },
   "devDependencies": {
